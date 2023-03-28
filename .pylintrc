@@ -1,0 +1,3 @@
+[FORMAT]
+good-names=x,y,c1,c2,n,by,at
+max-line-length=120
