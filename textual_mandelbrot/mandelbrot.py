@@ -130,8 +130,8 @@ class Mandelbrot( Canvas ):
         """Move the Mandelbrot Set within the view.
 
         Args:
-            x (int): The amount and direction to move in X.
-            y (int): The amount and direction to move in Y.
+            x: The amount and direction to move in X.
+            y: The amount and direction to move in Y.
         """
 
         x_step = Decimal( x * ( ( self.to_x - self.from_x ) / self.MOVE_STEPS ) )
