@@ -38,6 +38,10 @@ class MandelbrotApp( App[ None ] ):
         yield Mandelbrot( 128, 96 )
         yield Footer()
 
+    def on_mount( self ) -> None:
+        """Set things up once the DOM is available."""
+        self.query_one( Mandelbrot ).focus()
+
 ##############################################################################
 # Run the main application if we're being called on as main.
 if __name__ == "__main__":
