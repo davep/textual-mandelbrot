@@ -20,6 +20,18 @@ class MandelbrotApp( App[ None ] ):
     SUB_TITLE = f"v{__version__}"
     """The sub-title for the application."""
 
+    CSS = """
+    Screen {
+        align: center middle;
+    }
+
+    Mandelbrot {
+        border: heavy grey;
+        width: 130;
+        height: 50;
+    }
+    """
+
     def compose( self ) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
