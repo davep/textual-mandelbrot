@@ -149,11 +149,11 @@ class Mandelbrot( Canvas ):
         """Scale a dimension.
 
         Args:
-            from_pos (Decimal): The start position of the dimension.
-            to_pos (Decimal): The end position of the dimension.
+            from_pos: The start position of the dimension.
+            to_pos: The end position of the dimension.
 
         Returns:
-            tuple[ Decimal, Decimal ]: The new start and end positions.
+            The new start and end positions.
         """
 
         # Figure the operator from the sign.
@@ -176,7 +176,7 @@ class Mandelbrot( Canvas ):
         """Zoom in our out.
 
         Args:
-            zoom (Decimal): The amount to zoom by.
+            zoom: The amount to zoom by.
         """
 
         # Apply the zoom.
@@ -190,7 +190,7 @@ class Mandelbrot( Canvas ):
         """Change the maximum number of iterations for a calculation.
 
         Args:
-            change (int): The amount to change by.
+            change: The amount to change by.
         """
         # Keep a lower bound for the max iteration.
         if ( self.max_iteration + change ) > 10:
