@@ -1,3 +1,4 @@
 [FORMAT]
 good-names=x,y,c1,c2,n,by
 max-line-length=120
+max-args=10

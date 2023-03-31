@@ -14,11 +14,8 @@ from .mandelbrot import Mandelbrot
 class MandelbrotApp( App[ None ] ):
     """A Textual-based Mandelbrot set plotting application for the terminal."""
 
-    TITLE = "Mandelbrot"
+    TITLE = f"Mandelbrot v{__version__}"
     """The title for the application."""
-
-    SUB_TITLE = f"v{__version__}"
-    """The sub-title for the application."""
 
     CSS = """
     Screen {
@@ -41,6 +38,20 @@ class MandelbrotApp( App[ None ] ):
     def on_mount( self ) -> None:
         """Set things up once the DOM is available."""
         self.query_one( Mandelbrot ).focus()
+
+    def on_mandelbrot_changed( self, event: Mandelbrot.Changed ) -> None:
+        """Handle the parameters of the Mandelbrot being changed.
+
+        Args:
+            event: The event with the change details.
+        """
+        self.sub_title = (
+            f"{event.from_x:.2f}, "
+            f"{event.from_y:.2f} -> "
+            f"{event.to_x:.2f}, "
+            f"{event.to_y:.2f} -- "
+            f"{event.max_iteration} iterations"
+        )
 
 ##############################################################################
 # Run the main application if we're being called on as main.
