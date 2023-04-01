@@ -89,8 +89,8 @@ class MandelbrotApp( App[ None ] ):
             event: The event with the change details.
         """
         self.sub_title = (
-            f"( {event.from_x:.2f}, {event.from_y:.2f} ) -> "
-            f"( {event.to_x:.2f}, {event.to_y:.2f} )"
+            f"( {event.from_x:.6f}, {event.from_y:.6f} ) -> "
+            f"( {event.to_x:.6f}, {event.to_y:.6f} )"
             f" | {event.max_iteration} iterations"
         )
 
