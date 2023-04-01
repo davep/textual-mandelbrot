@@ -33,6 +33,28 @@ def colour_map( value: int, max_iteration: int ) -> Color:
     return Color.from_hsl( value / max_iteration, 1, 0.5 if value else 0 )
 
 ##############################################################################
+@lru_cache()
+def _mandelbrot( x: Decimal, y: Decimal, max_iteration: int ) -> int:
+    """Return the Mandelbrot calculation for the point.
+
+    Returns:
+        The number of loops to escape, or 0 if it didn't.
+
+    Note:
+        The point is considered to be stable, considered to have not
+        escaped, if the ``max_iteration`` has been hit without the
+        calculation going above 2.0.
+    """
+    c1 = complex( x, y )
+    c2 = 0j
+    for n in range( max_iteration ):
+        if abs( c2 ) > 2:
+            return n
+        c2 = c1 + ( c2 * c2 )
+    return 0
+
+
+##############################################################################
 class Mandelbrot( Canvas ):
     """A Mandelbrot-plotting widget."""
 
@@ -136,33 +158,17 @@ class Mandelbrot( Canvas ):
             n += Decimal( step )
             steps += 1
 
-    @lru_cache()
-    def _mandelbrot( self, x: Decimal, y: Decimal ) -> int:
-        """Return the Mandelbrot calculation for the point.
-
-        Returns:
-            The number of loops to escape, or 0 if it didn't.
-
-        Note:
-            The point is considered to be stable, considered to have not
-            escaped, if the ``max_iteration`` has been hit without the
-            calculation going above 2.0.
-        """
-        c1 = complex( x, y )
-        c2 = 0j
-        for n in range( self._max_iteration ):
-            if abs( c2 ) > 2:
-                return n
-            c2 = c1 + ( c2 * c2 )
-        return 0
-
     def _plot( self ) -> None:
         """Plot the Mandelbrot set using the current conditions."""
         with self.app.batch_update():
             for x_pixel, x_point in enumerate( self._frange( self._from_x, self._to_x, self.width ) ):
                 for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
                     self.set_pixel(
-                        x_pixel, y_pixel, colour_map( self._mandelbrot( x_point, y_point ), self._max_iteration )
+                        x_pixel, y_pixel,
+                        colour_map(
+                            _mandelbrot( x_point, y_point, self._max_iteration ),
+                            self._max_iteration
+                        )
                     )
 
     def on_mount( self ) -> None:
