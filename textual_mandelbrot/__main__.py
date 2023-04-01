@@ -95,8 +95,13 @@ class MandelbrotApp( App[ None ] ):
         )
 
 ##############################################################################
+def main():
+    """Main entry point for the console script version."""
+    MandelbrotApp().run()
+
+##############################################################################
 # Run the main application if we're being called on as main.
 if __name__ == "__main__":
-    MandelbrotApp().run()
+    main()
 
 ### __main__.py ends here
