@@ -115,7 +115,7 @@ class Mandelbrot( Canvas ):
         self._to_y: Decimal = Decimal( 1.5 )
         """End Y position for the plot."""
 
-    def frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
+    def _frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
         """Generate a float range for the plot.
 
         Args:
@@ -134,7 +134,7 @@ class Mandelbrot( Canvas ):
             n += Decimal( step )
             steps += 1
 
-    def mandelbrot( self, x: Decimal, y: Decimal ) -> int:
+    def _mandelbrot( self, x: Decimal, y: Decimal ) -> int:
         """Return the Mandelbrot calculation for the point.
 
         Returns:
@@ -153,18 +153,18 @@ class Mandelbrot( Canvas ):
             c2 = c1 + ( c2 * c2 )
         return 0
 
-    def plot( self ) -> None:
+    def _plot( self ) -> None:
         """Plot the Mandelbrot set using the current conditions."""
         with self.app.batch_update():
-            for x_pixel, x_point in enumerate( self.frange( self._from_x, self._to_x, self.width ) ):
-                for y_pixel, y_point in enumerate( self.frange( self._from_y, self._to_y, self.height ) ):
+            for x_pixel, x_point in enumerate( self._frange( self._from_x, self._to_x, self.width ) ):
+                for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
                     self.set_pixel(
-                        x_pixel, y_pixel, colour_map( self.mandelbrot( x_point, y_point ), self._max_iteration )
+                        x_pixel, y_pixel, colour_map( self._mandelbrot( x_point, y_point ), self._max_iteration )
                     )
 
     def on_mount( self ) -> None:
         """Get the plotter going once the DOM is ready."""
-        self.plot()
+        self._plot()
         self.post_message( self.Changed( self ) )
 
     MOVE_STEPS: Final = 5
@@ -186,7 +186,7 @@ class Mandelbrot( Canvas ):
         self._from_y += y_step
         self._to_y   += y_step
 
-        self.plot()
+        self._plot()
         self.post_message( self.Changed( self ) )
 
     @staticmethod
@@ -228,7 +228,7 @@ class Mandelbrot( Canvas ):
         self._from_x, self._to_x = self._scale( self._from_x, self._to_x, zoom )
         self._from_y, self._to_y = self._scale( self._from_y, self._to_y, zoom )
 
-        self.plot()
+        self._plot()
         self.post_message( self.Changed( self ) )
 
     def action_max_iter( self, change: int ) -> None:
@@ -240,7 +240,7 @@ class Mandelbrot( Canvas ):
         # Keep a lower bound for the max iteration.
         if ( self._max_iteration + change ) >= 10:
             self._max_iteration += change
-            self.plot()
+            self._plot()
             self.post_message( self.Changed( self ) )
         else:
             self.app.bell()
