@@ -78,6 +78,7 @@ class Mandelbrot( Canvas ):
         Binding( "less_than_sign",       "max_iter( -100 )", "Res--", key_display="<" ),
         Binding( "full_stop",            "max_iter( 10 )",   "Res+",  key_display="." ),
         Binding( "greater_than_sign",    "max_iter( 100 )",  "Res++", key_display=">" ),
+        Binding( "r",                    "reset",            "Reset"                  ),
         Binding( "escape",               "app.quit",         "Exit" )
     ]
     """Keyboard bindings for the widget."""
@@ -138,6 +139,14 @@ class Mandelbrot( Canvas ):
         """Start Y position for the plot."""
         self._to_y: Decimal = Decimal( 1.5 )
         """End Y position for the plot."""
+
+    def reset( self ) -> None:
+        """Reset the plot."""
+        self._max_iteration = 80
+        self._from_x        = Decimal( -2.5 )
+        self._to_x          = Decimal( 1.5 )
+        self._from_y        = Decimal( -1.5 )
+        self._to_y          = Decimal( 1.5 )
 
     def _frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
         """Generate a float range for the plot.
@@ -253,5 +262,11 @@ class Mandelbrot( Canvas ):
             self.post_message( self.Changed( self ) )
         else:
             self.app.bell()
+
+    def action_reset( self ) -> None:
+        """Reset the display of the Mandelbrot set back to initial conditions."""
+        self.reset()
+        self._plot()
+        self.post_message( self.Changed( self ) )
 
 ### mandelbrot.py ends here
