@@ -54,6 +54,7 @@ class Mandelbrot( Canvas ):
         Binding( "less_than_sign",       "max_iter( -100 )", "Res--", key_display="<" ),
         Binding( "full_stop",            "max_iter( 10 )",   "Res+",  key_display="." ),
         Binding( "greater_than_sign",    "max_iter( 100 )",  "Res++", key_display=">" ),
+        Binding( "escape",               "app.quit",         "Exit" )
     ]
     """Keyboard bindings for the widget."""
 
