@@ -237,7 +237,7 @@ class Mandelbrot( Canvas ):
             change: The amount to change by.
         """
         # Keep a lower bound for the max iteration.
-        if ( self._max_iteration + change ) > 10:
+        if ( self._max_iteration + change ) >= 10:
             self._max_iteration += change
             self.plot()
             self.post_message( self.Changed( self ) )
