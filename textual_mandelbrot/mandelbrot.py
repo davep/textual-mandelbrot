@@ -5,6 +5,7 @@
 from __future__        import annotations
 from decimal           import Decimal
 from operator          import mul, truediv
+from functools         import lru_cache
 from typing            import Iterator
 from typing_extensions import Final
 
@@ -19,6 +20,7 @@ from textual.message  import Message
 from textual_canvas import Canvas
 
 ##############################################################################
+@lru_cache()
 def colour_map( value: int, max_iteration: int ) -> Color:
     """Calculate a colour for an escape value.
 
@@ -134,6 +136,7 @@ class Mandelbrot( Canvas ):
             n += Decimal( step )
             steps += 1
 
+    @lru_cache()
     def _mandelbrot( self, x: Decimal, y: Decimal ) -> int:
         """Return the Mandelbrot calculation for the point.
 
