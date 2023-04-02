@@ -66,6 +66,21 @@ def blue_brown_map( value: int, _: int ) -> Color:
     """
     return BLUE_BROWN[ value % 16] if value else Color( 0, 0, 0 )
 
+
+##############################################################################
+GREENS = [ Color( 0, n * 16, 0 ) for n in range( 16 ) ]
+@lru_cache()
+def shades_of_green( value: int, _: int ) -> Color:
+    """Calculate a colour for an escape value.
+
+    Args:
+        value: An escape value from a Mandelbrot set.
+
+    Returns:
+        The colour to plot the point with.
+    """
+    return GREENS[ value % 16 ]
+
 ##############################################################################
 @lru_cache()
 def _mandelbrot( x: Decimal, y: Decimal, multibrot: float, max_iteration: int ) -> int:
