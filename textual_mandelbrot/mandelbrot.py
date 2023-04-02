@@ -69,13 +69,25 @@ class Mandelbrot( Canvas ):
             "up, w, k", "move( 0, -1 )", "Up", show=False
         ),
         Binding(
+            "shift+up, W, W", "move( 0, -1, 50 )", "Up", show=False
+        ),
+        Binding(
             "down, s, j", "move( 0, 1 )", "Down", show=False
+        ),
+        Binding(
+            "shift+down, S, J", "move( 0, 1, 50 )", "Down", show=False
         ),
         Binding(
             "left, a, h", "move( -1, 0 )", "Left", show=False
         ),
         Binding(
+            "shift+left, A, H", "move( -1, 0, 50 )", "Left", show=False
+        ),
+        Binding(
             "right, d, l", "move( 1, 0 )", "Right", show=False
+        ),
+        Binding(
+            "shift+right, D, L", "move( 1, 0, 50 )", "Right", show=False
         ),
         Binding(
             "pageup, right_square_bracket",
@@ -229,10 +241,7 @@ class Mandelbrot( Canvas ):
         """Get the plotter going once the DOM is ready."""
         self._plot()
 
-    MOVE_STEPS: Final = 5
-    "Defines the granularity of movement in the application."
-
-    def action_move( self, x: int, y: int ) -> None:
+    def action_move( self, x: int, y: int, steps: int=5 ) -> None:
         """Move the Mandelbrot Set within the view.
 
         Args:
@@ -240,8 +249,8 @@ class Mandelbrot( Canvas ):
             y: The amount and direction to move in Y.
         """
 
-        x_step = Decimal( x * ( ( self._to_x - self._from_x ) / self.MOVE_STEPS ) )
-        y_step = Decimal( y * ( ( self._to_y - self._from_y ) / self.MOVE_STEPS ) )
+        x_step = Decimal( x * ( ( self._to_x - self._from_x ) / steps ) )
+        y_step = Decimal( y * ( ( self._to_y - self._from_y ) / steps ) )
 
         self._from_x += x_step
         self._to_x   += x_step

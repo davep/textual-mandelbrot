@@ -8,7 +8,7 @@
 - Added a reset action.
 - Cosmetic changes to the UI.
 - Improved the key bindings, giving more options (for example, vi and WASD
-  keys are supported for movement now).
+  keys are supported for movement now, also shift+movement moves slower).
 - Added "multibrot" support.
 
 ## v0.1.0
