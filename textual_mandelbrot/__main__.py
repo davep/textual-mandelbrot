@@ -114,7 +114,7 @@ class MandelbrotApp( App[ None ] ):
         ][ colour] )
 
 ##############################################################################
-def main():
+def main() -> None:
     """Main entry point for the console script version."""
     MandelbrotApp().run()
 
