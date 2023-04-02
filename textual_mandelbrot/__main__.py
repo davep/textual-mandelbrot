@@ -7,12 +7,13 @@ from __future__ import annotations
 ##############################################################################
 # Textual imports.
 from textual.app     import App, ComposeResult
+from textual.binding import Binding
 from textual.widgets import Header, Footer
 
 ##############################################################################
 # Local imports.
 from .           import __version__
-from .mandelbrot import Mandelbrot
+from .mandelbrot import Mandelbrot, default_map, blue_brown_map, shades_of_green
 
 ##############################################################################
 class MandelbrotApp( App[ None ] ):
@@ -33,6 +34,13 @@ class MandelbrotApp( App[ None ] ):
         border: round grey;
     }
     """
+
+    BINDINGS = [
+        Binding( "1", "colour( 0 )", "Colours 1", show=False ),
+        Binding( "2", "colour( 1 )", "Colours 2", show=False ),
+        Binding( "3", "colour( 2 )", "Colours 2", show=False )
+    ]
+    """Keyboard bindings for the application."""
 
     def _best_size( self ) -> tuple[ tuple[ int, int ], tuple[ int, int ] ]:
         """Figure out the best initial size for the plot and the widget.
@@ -94,6 +102,16 @@ class MandelbrotApp( App[ None ] ):
         plot                 = self.query_one( Mandelbrot )
         plot.border_title    = f"{event.from_x:.10f}, {event.from_y:.10f} -> {event.to_x:.10f}, {event.to_y:.10f}"
         plot.border_subtitle = f"{event.multibrot:0.2f} multibrot | {event.max_iteration:0.2f} iterations"
+
+    def action_colour( self, colour: int ) -> None:
+        """Set a colour scheme for the plot.
+
+        Args:
+            colour: The number of the colour scheme to use.
+        """
+        self.query_one( Mandelbrot ).set_colour_source( [
+            default_map, blue_brown_map, shades_of_green
+        ][ colour] )
 
 ##############################################################################
 def main():
