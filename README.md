@@ -21,4 +21,7 @@ $ pipx install textual-mandelbrot
 Once installed you should be able to run the command `mandelexp` and the
 application will run.
 
+![mandelexp in action](https://raw.githubusercontent.com/davep/textual-mandelbrot/main/img/mandelexp03.png)
+![mandelexp in action](https://raw.githubusercontent.com/davep/textual-mandelbrot/main/img/mandelexp04.png)
+
 [//]: # (README.md ends here)

@@ -2,7 +2,7 @@
 
 ## v0.2.0
 
-**Released: WiP**
+**Released: 2023-04-02**
 
 - Fixed overly-aggressive caching of the Mandelbrot calculation.
 - Added a reset action.
