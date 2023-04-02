@@ -65,20 +65,52 @@ class Mandelbrot( Canvas ):
     """
 
     BINDINGS = [
-        Binding( "up",                   "move( 0, -1 )",    "Up",    show=False ),
-        Binding( "down",                 "move( 0, 1 )",     "Down",  show=False ),
-        Binding( "left",                 "move( -1, 0 )",    "Left",  show=False ),
-        Binding( "right",                "move( 1, 0 )",     "Right", show=False ),
-        Binding( "right_square_bracket", "zoom( -1.2 )",     "In" ),
-        Binding( "left_square_bracket",  "zoom( 1.2 )",      "Out" ),
-        Binding( "right_curly_bracket",  "zoom( -2.0 )",     "In+" ),
-        Binding( "left_curly_bracket",   "zoom( 2.0 )",      "Out+" ),
-        Binding( "comma",                "max_iter( -10 )",  "Res-" ),
-        Binding( "less_than_sign",       "max_iter( -100 )", "Res--" ),
-        Binding( "full_stop",            "max_iter( 10 )",   "Res+" ),
-        Binding( "greater_than_sign",    "max_iter( 100 )",  "Res++" ),
-        Binding( "r",                    "reset",            "Reset" ),
-        Binding( "escape",               "app.quit",         "Exit" )
+        Binding(
+            "up, w, k", "move( 0, -1 )", "Up", show=False
+        ),
+        Binding(
+            "down, s, j", "move( 0, 1 )", "Down", show=False
+        ),
+        Binding(
+            "left, a, h", "move( -1, 0 )", "Left", show=False
+        ),
+        Binding(
+            "right, d, l", "move( 1, 0 )", "Right", show=False
+        ),
+        Binding(
+            "pageup, right_square_bracket",
+            "zoom( -1.2 )", "In", key_display="PgUp"
+        ),
+        Binding(
+            "pagedown, left_square_bracket",
+            "zoom( 1.2 )", "Out", key_display="PgDn"
+        ),
+        Binding(
+            "ctrl+pageup, right_curly_bracket",
+            "zoom( -2.0 )", "In+", key_display="Ctrl+PgUp"
+        ),
+        Binding(
+            "ctrl+pagedown, left_curly_bracket",
+            "zoom( 2.0 )", "Out+", key_display="Ctrl+PgDn"
+        ),
+        Binding(
+            "comma", "max_iter( -10 )","Res-"
+        ),
+        Binding(
+            "less_than_sign", "max_iter( -100 )", "Res--"
+        ),
+        Binding(
+            "full_stop", "max_iter( 10 )", "Res+"
+        ),
+        Binding(
+            "greater_than_sign", "max_iter( 100 )", "Res++"
+        ),
+        Binding(
+            "ctrl+r", "reset", "Reset"
+        ),
+        Binding(
+            "escape", "app.quit", "Exit"
+        )
     ]
     """Keyboard bindings for the widget."""
 

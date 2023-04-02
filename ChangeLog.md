@@ -7,6 +7,8 @@
 - Fixed overly-aggressive caching of the Mandelbrot calculation.
 - Added a reset action.
 - Cosmetic changes to the UI.
+- Improved the key bindings, giving more options (for example, vi and WASD
+  keys are supported for movement now).
 
 ## v0.1.0
 
