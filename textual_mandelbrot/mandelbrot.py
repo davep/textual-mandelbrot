@@ -53,7 +53,6 @@ def _mandelbrot( x: Decimal, y: Decimal, max_iteration: int ) -> int:
         c2 = c1 + ( c2 * c2 )
     return 0
 
-
 ##############################################################################
 class Mandelbrot( Canvas ):
     """A Mandelbrot-plotting widget."""
