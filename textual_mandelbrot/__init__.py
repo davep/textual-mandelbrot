@@ -12,10 +12,10 @@ __licence__    = "MIT"
 
 ##############################################################################
 # Local imports.
-from .mandelbrot import Mandelbrot, default_map, blue_brown_map
+from .mandelbrot import Mandelbrot, default_map, blue_brown_map, shades_of_green
 
 ##############################################################################
 # Export the imports.
-__all__ = [ "Mandelbrot", "default_map", "blue_brown_map" ]
+__all__ = [ "Mandelbrot", "default_map", "blue_brown_map", "shades_of_green" ]
 
 ### __init__.py ends here
