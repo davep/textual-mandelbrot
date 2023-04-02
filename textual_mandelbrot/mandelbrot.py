@@ -239,7 +239,7 @@ class Mandelbrot( Canvas ):
         n     = Decimal( r_from )
         while n < r_to and steps < size:
             yield n
-            n     += Decimal( step )
+            n     += step
             steps += 1
 
     def plot( self ) -> Self:
