@@ -269,6 +269,18 @@ class Mandelbrot( Canvas ):
         self._to_y          = Decimal( 1.5 )
         return self
 
+    def set_colour_source( self, colour_source: Callable[ [ int, int ], Color ] ) -> Self:
+        """Set a new colour source.
+
+        Args:
+            colour_source: The new colour source.
+
+        Returns:
+            Self.
+        """
+        self._colour_source = colour_source
+        return self.plot()
+
     def _frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
         """Generate a float range for the plot.
 
