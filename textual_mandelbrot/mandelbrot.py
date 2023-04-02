@@ -111,6 +111,7 @@ class Mandelbrot( Canvas ):
         Binding(
             "shift+pagedown", "multibrot( -1 )", "Mul-", key_display="Sh+PgDn"
         ),
+        Binding( "home", "zero", "0, 0", key_display="Home" ),
         Binding(
             "comma", "max_iter( -10 )","Res-"
         ),
@@ -255,6 +256,16 @@ class Mandelbrot( Canvas ):
         self._from_y += y_step
         self._to_y   += y_step
 
+        self._plot()
+
+    def action_zero( self ) -> None:
+        """Move the view to 0, 0."""
+        width        = ( self._to_x - self._from_x ) / Decimal( 2 )
+        height       = ( self._to_y - self._from_y ) / Decimal( 2 )
+        self._from_x = -width
+        self._to_x   = width
+        self._from_y = -height
+        self._to_y   = height
         self._plot()
 
     @staticmethod
