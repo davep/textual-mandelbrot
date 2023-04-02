@@ -93,7 +93,7 @@ class MandelbrotApp( App[ None ] ):
         """
         plot                 = self.query_one( Mandelbrot )
         plot.border_title    = f"{event.from_x:.10f}, {event.from_y:.10f} -> {event.to_x:.10f}, {event.to_y:.10f}"
-        plot.border_subtitle = f"{event.multibrot} multibrot | {event.max_iteration} iterations"
+        plot.border_subtitle = f"{event.multibrot:0.2f} multibrot | {event.max_iteration:0.2f} iterations"
 
 ##############################################################################
 def main():

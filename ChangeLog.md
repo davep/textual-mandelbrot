@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## v0.3.0
+
+**Released: WiP**
+
+- Added bindings to change the "multibrot" value by smaller steps.
+
 ## v0.2.0
 
 **Released: 2023-04-02**

@@ -111,8 +111,14 @@ class Mandelbrot( Canvas ):
             "ctrl+pagedown, left_curly_bracket",
             "zoom( 2.0 )", "Out+", key_display="Ctrl+PgDn"
         ),
-        Binding( "*", "multibrot( 1 )", "Mul+" ),
-        Binding( "/", "multibrot( -1 )", "Mul-" ),
+        Binding( "*, ctrl+up", "multibrot( 1 )", "Mul+" ),
+        Binding( "/, ctrl+down", "multibrot( -1 )", "Mul-" ),
+        Binding(
+            "ctrl+shift+up", "multibrot( 0.05 )", "Mul+", show=False
+        ),
+        Binding(
+            "ctrl+shift+down", "multibrot( -0.05 )", "Mul-", show=False
+        ),
         Binding( "home", "zero", "0, 0", key_display="Home" ),
         Binding(
             "comma", "max_iter( -10 )","Res-"
@@ -327,8 +333,8 @@ class Mandelbrot( Canvas ):
         Args:
             change: The amount to change by.
         """
-        if ( self._multibrot + change ) >= 2:
-            self._multibrot += change
+        if ( self._multibrot + Decimal( change ) ) > 0:
+            self._multibrot += Decimal( change )
             self._plot()
         else:
             self.app.bell()
