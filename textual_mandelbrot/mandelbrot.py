@@ -34,7 +34,7 @@ def colour_map( value: int, max_iteration: int ) -> Color:
 
 ##############################################################################
 @lru_cache()
-def _mandelbrot( x: Decimal, y: Decimal, max_iteration: int ) -> int:
+def _mandelbrot( x: Decimal, y: Decimal, multibrot: float, max_iteration: int ) -> int:
     """Return the Mandelbrot calculation for the point.
 
     Returns:
@@ -50,7 +50,7 @@ def _mandelbrot( x: Decimal, y: Decimal, max_iteration: int ) -> int:
     for n in range( max_iteration ):
         if abs( c2 ) > 2:
             return n
-        c2 = c1 + ( c2 * c2 )
+        c2 = c1 + ( c2 ** multibrot )
     return 0
 
 ##############################################################################
@@ -94,6 +94,14 @@ class Mandelbrot( Canvas ):
             "zoom( 2.0 )", "Out+", key_display="Ctrl+PgDn"
         ),
         Binding(
+            "shift+pageup", "multibrot( 1 )", "Mul+",
+            key_display="Sh+PgUp"
+        ),
+        Binding(
+            "shift+pagedown", "multibrot( -1 )", "Mul-",
+            key_display="Sh+PgDn"
+        ),
+        Binding(
             "comma", "max_iter( -10 )","Res-"
         ),
         Binding(
@@ -129,6 +137,8 @@ class Mandelbrot( Canvas ):
             super().__init__()
             self.mandelbrot: Mandelbrot = mandelbrot
             """The Mandelbrot widget that caused the event."""
+            self.multibrot: Decimal = mandelbrot._multibrot
+            """The 'multibrot' value."""
             self.from_x: Decimal = mandelbrot._from_x
             """Start X position for the plot."""
             self.to_x: Decimal = mandelbrot._to_x
@@ -162,6 +172,8 @@ class Mandelbrot( Canvas ):
         super().__init__( width, height, name=name, id=id, classes=classes, disabled=disabled )
         self._max_iteration: int = 80
         "Maximum number of iterations to perform."
+        self._multibrot: Decimal = Decimal( 2.0 )
+        """The 'multibrot' value."""
         self._from_x: Decimal = Decimal( -2.5 )
         """Start X position for the plot."""
         self._to_x: Decimal = Decimal( 1.5 )
@@ -174,6 +186,7 @@ class Mandelbrot( Canvas ):
     def reset( self ) -> None:
         """Reset the plot."""
         self._max_iteration = 80
+        self._multibrot     = Decimal( 2 )
         self._from_x        = Decimal( -2.5 )
         self._to_x          = Decimal( 1.5 )
         self._from_y        = Decimal( -1.5 )
@@ -206,7 +219,7 @@ class Mandelbrot( Canvas ):
                     self.set_pixel(
                         x_pixel, y_pixel,
                         colour_map(
-                            _mandelbrot( x_point, y_point, self._max_iteration ),
+                            _mandelbrot( x_point, y_point, float( self._multibrot ), self._max_iteration ),
                             self._max_iteration
                         )
                     )
@@ -284,6 +297,18 @@ class Mandelbrot( Canvas ):
         # Keep a lower bound for the max iteration.
         if ( self._max_iteration + change ) >= 10:
             self._max_iteration += change
+            self._plot()
+        else:
+            self.app.bell()
+
+    def action_multibrot( self, change: Decimal ) -> None:
+        """Change the 'multibrot' modifier.
+
+        Args:
+            change: The amount to change by.
+        """
+        if ( self._multibrot + change ) >= 2:
+            self._multibrot += change
             self._plot()
         else:
             self.app.bell()
