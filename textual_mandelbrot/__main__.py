@@ -13,7 +13,8 @@ from textual.widgets import Header, Footer
 ##############################################################################
 # Local imports.
 from .           import __version__
-from .mandelbrot import Mandelbrot, default_map, blue_brown_map, shades_of_green
+from .mandelbrot import Mandelbrot
+from .colouring  import default_map, blue_brown_map, shades_of_green
 
 ##############################################################################
 class MandelbrotApp( App[ None ] ):

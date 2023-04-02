@@ -12,7 +12,8 @@ __licence__    = "MIT"
 
 ##############################################################################
 # Local imports.
-from .mandelbrot import Mandelbrot, default_map, blue_brown_map, shades_of_green
+from .mandelbrot import Mandelbrot
+from .colouring  import default_map, blue_brown_map, shades_of_green
 
 ##############################################################################
 # Export the imports.
