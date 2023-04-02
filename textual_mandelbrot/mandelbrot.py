@@ -2,11 +2,12 @@
 
 ##############################################################################
 # Python imports.
-from __future__ import annotations
-from decimal    import Decimal
-from operator   import mul, truediv
-from functools  import lru_cache
-from typing     import Iterator
+from __future__        import annotations
+from decimal           import Decimal
+from operator          import mul, truediv
+from functools         import lru_cache
+from typing            import Iterator
+from typing_extensions import Self
 
 ##############################################################################
 # Textual imports.
@@ -201,14 +202,19 @@ class Mandelbrot( Canvas ):
         self._to_y: Decimal = Decimal( 1.5 )
         """End Y position for the plot."""
 
-    def reset( self ) -> None:
-        """Reset the plot."""
+    def reset( self ) -> Self:
+        """Reset the plot.
+
+        Returns:
+            Self.
+        """
         self._max_iteration = 80
         self._multibrot     = Decimal( 2 )
         self._from_x        = Decimal( -2.5 )
         self._to_x          = Decimal( 1.5 )
         self._from_y        = Decimal( -1.5 )
         self._to_y          = Decimal( 1.5 )
+        return self
 
     def _frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
         """Generate a float range for the plot.
@@ -229,8 +235,12 @@ class Mandelbrot( Canvas ):
             n     += Decimal( step )
             steps += 1
 
-    def _plot( self ) -> None:
-        """Plot the Mandelbrot set using the current conditions."""
+    def _plot( self ) -> Self:
+        """Plot the Mandelbrot set using the current conditions.
+
+        Returns:
+            Self.
+        """
         with self.app.batch_update():
             for x_pixel, x_point in enumerate( self._frange( self._from_x, self._to_x, self.width ) ):
                 for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
@@ -242,6 +252,7 @@ class Mandelbrot( Canvas ):
                         )
                     )
         self.post_message( self.Changed( self ) )
+        return self
 
     def on_mount( self ) -> None:
         """Get the plotter going once the DOM is ready."""
@@ -340,7 +351,6 @@ class Mandelbrot( Canvas ):
 
     def action_reset( self ) -> None:
         """Reset the display of the Mandelbrot set back to initial conditions."""
-        self.reset()
-        self._plot()
+        self.reset()._plot()
 
 ### mandelbrot.py ends here
