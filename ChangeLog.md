@@ -6,6 +6,7 @@
 
 - Fixed overly-aggressive caching of the Mandelbrot calculation.
 - Added a reset action.
+- Cosmetic changes to the UI.
 
 ## v0.1.0
 
