@@ -66,7 +66,6 @@ def blue_brown_map( value: int, _: int ) -> Color:
     """
     return BLUE_BROWN[ value % 16] if value else Color( 0, 0, 0 )
 
-
 ##############################################################################
 GREENS = [ Color( 0, n * 16, 0 ) for n in range( 16 ) ]
 @lru_cache()
