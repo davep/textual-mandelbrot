@@ -2,12 +2,11 @@
 
 ##############################################################################
 # Python imports.
-from __future__        import annotations
-from decimal           import Decimal
-from operator          import mul, truediv
-from functools         import lru_cache
-from typing            import Iterator
-from typing_extensions import Final
+from __future__ import annotations
+from decimal    import Decimal
+from operator   import mul, truediv
+from functools  import lru_cache
+from typing     import Iterator
 
 ##############################################################################
 # Textual imports.

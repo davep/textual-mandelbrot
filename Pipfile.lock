@@ -528,11 +528,11 @@
                 "dev"
             ],
             "hashes": [
-                "sha256:1745014ea6c32415533b5edfe47fdcd1c01125a3fe9ba4fefbdc73600bd156d1",
-                "sha256:d9d99f536952ed056459bcd2c1f0199daff6922eef49774613142def10e5eda3"
+                "sha256:1f3d2af9538a4e1c6bd6061916b519f802f88659badbed434fca7ce94fe9a338",
+                "sha256:f0a34bb5bc73090b8ccd97c2d888285a5325cc4e60fe064c19da9b6c8615bb11"
             ],
             "index": "pypi",
-            "version": "==0.17.1"
+            "version": "==0.17.2"
         },
         "textual-canvas": {
             "hashes": [
