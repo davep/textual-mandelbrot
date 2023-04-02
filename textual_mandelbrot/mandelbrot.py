@@ -65,19 +65,19 @@ class Mandelbrot( Canvas ):
     """
 
     BINDINGS = [
-        Binding( "up",                   "move( 0, -1 )",    "Up",    key_display="↑" ),
-        Binding( "down",                 "move( 0, 1 )",     "Down",  key_display="↓" ),
-        Binding( "left",                 "move( -1, 0 )",    "Left",  key_display="←" ),
-        Binding( "right",                "move( 1, 0 )",     "Right", key_display="→" ),
-        Binding( "right_square_bracket", "zoom( -1.2 )",     "In",    key_display="]" ),
-        Binding( "left_square_bracket",  "zoom( 1.2 )",      "Out",   key_display="[" ),
-        Binding( "right_curly_bracket",  "zoom( -2.0 )",     "In+",   key_display="}" ),
-        Binding( "left_curly_bracket",   "zoom( 2.0 )",      "Out+",  key_display="{" ),
-        Binding( "comma",                "max_iter( -10 )",  "Res-",  key_display="," ),
-        Binding( "less_than_sign",       "max_iter( -100 )", "Res--", key_display="<" ),
-        Binding( "full_stop",            "max_iter( 10 )",   "Res+",  key_display="." ),
-        Binding( "greater_than_sign",    "max_iter( 100 )",  "Res++", key_display=">" ),
-        Binding( "r",                    "reset",            "Reset"                  ),
+        Binding( "up",                   "move( 0, -1 )",    "Up" ),
+        Binding( "down",                 "move( 0, 1 )",     "Down" ),
+        Binding( "left",                 "move( -1, 0 )",    "Left" ),
+        Binding( "right",                "move( 1, 0 )",     "Right" ),
+        Binding( "right_square_bracket", "zoom( -1.2 )",     "In" ),
+        Binding( "left_square_bracket",  "zoom( 1.2 )",      "Out" ),
+        Binding( "right_curly_bracket",  "zoom( -2.0 )",     "In+" ),
+        Binding( "left_curly_bracket",   "zoom( 2.0 )",      "Out+" ),
+        Binding( "comma",                "max_iter( -10 )",  "Res-" ),
+        Binding( "less_than_sign",       "max_iter( -100 )", "Res--" ),
+        Binding( "full_stop",            "max_iter( 10 )",   "Res+" ),
+        Binding( "greater_than_sign",    "max_iter( 100 )",  "Res++" ),
+        Binding( "r",                    "reset",            "Reset" ),
         Binding( "escape",               "app.quit",         "Exit" )
     ]
     """Keyboard bindings for the widget."""
