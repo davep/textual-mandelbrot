@@ -92,7 +92,7 @@ class MandelbrotApp( App[ None ] ):
             event: The event with the change details.
         """
         plot                 = self.query_one( Mandelbrot )
-        plot.border_title    = f"{event.from_x:.6f}, {event.from_y:.6f} ) -> {event.to_x:.6f}, {event.to_y:.6f}"
+        plot.border_title    = f"{event.from_x:.6f}, {event.from_y:.6f} -> {event.to_x:.6f}, {event.to_y:.6f}"
         plot.border_subtitle = f"{event.max_iteration} iterations"
 
 ##############################################################################
