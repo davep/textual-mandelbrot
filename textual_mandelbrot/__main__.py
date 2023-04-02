@@ -18,8 +18,11 @@ from .mandelbrot import Mandelbrot
 class MandelbrotApp( App[ None ] ):
     """A Textual-based Mandelbrot set plotting application for the terminal."""
 
-    TITLE = f"Mandelbrot v{__version__}"
+    TITLE = "Mandelbrot"
     """The title for the application."""
+
+    SUB_TITLE = f"v{__version__}"
+    """The sub-title for the application."""
 
     CSS = """
     Screen {
@@ -27,7 +30,7 @@ class MandelbrotApp( App[ None ] ):
     }
 
     Mandelbrot {
-        border: heavy grey;
+        border: round grey;
     }
     """
 
@@ -88,11 +91,9 @@ class MandelbrotApp( App[ None ] ):
         Args:
             event: The event with the change details.
         """
-        self.sub_title = (
-            f"( {event.from_x:.6f}, {event.from_y:.6f} ) -> "
-            f"( {event.to_x:.6f}, {event.to_y:.6f} )"
-            f" | {event.max_iteration} iterations"
-        )
+        plot                 = self.query_one( Mandelbrot )
+        plot.border_title    = f"{event.from_x:.6f}, {event.from_y:.6f} ) -> {event.to_x:.6f}, {event.to_y:.6f}"
+        plot.border_subtitle = f"{event.max_iteration} iterations"
 
 ##############################################################################
 def main():
