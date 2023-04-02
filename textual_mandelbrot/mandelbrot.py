@@ -65,10 +65,10 @@ class Mandelbrot( Canvas ):
     """
 
     BINDINGS = [
-        Binding( "up",                   "move( 0, -1 )",    "Up" ),
-        Binding( "down",                 "move( 0, 1 )",     "Down" ),
-        Binding( "left",                 "move( -1, 0 )",    "Left" ),
-        Binding( "right",                "move( 1, 0 )",     "Right" ),
+        Binding( "up",                   "move( 0, -1 )",    "Up",    show=False ),
+        Binding( "down",                 "move( 0, 1 )",     "Down",  show=False ),
+        Binding( "left",                 "move( -1, 0 )",    "Left",  show=False ),
+        Binding( "right",                "move( 1, 0 )",     "Right", show=False ),
         Binding( "right_square_bracket", "zoom( -1.2 )",     "In" ),
         Binding( "left_square_bracket",  "zoom( 1.2 )",      "Out" ),
         Binding( "right_curly_bracket",  "zoom( -2.0 )",     "In+" ),
