@@ -216,7 +216,7 @@ class Mandelbrot( Canvas ):
         Args:
             r_from: The value to generate from.
             r_to: The value to generate to.
-            size: The size of canvas in the desired direction..
+            size: The size of canvas in the desired direction.
 
         Yields:
             Decimal: Values between the range to fit the plot.
