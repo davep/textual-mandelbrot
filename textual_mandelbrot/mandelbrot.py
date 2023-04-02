@@ -235,7 +235,7 @@ class Mandelbrot( Canvas ):
             n     += Decimal( step )
             steps += 1
 
-    def _plot( self ) -> Self:
+    def plot( self ) -> Self:
         """Plot the Mandelbrot set using the current conditions.
 
         Returns:
@@ -256,7 +256,7 @@ class Mandelbrot( Canvas ):
 
     def on_mount( self ) -> None:
         """Get the plotter going once the DOM is ready."""
-        self._plot()
+        self.plot()
 
     def action_move( self, x: int, y: int, steps: int=5 ) -> None:
         """Move the Mandelbrot Set within the view.
@@ -274,7 +274,7 @@ class Mandelbrot( Canvas ):
         self._from_y += y_step
         self._to_y   += y_step
 
-        self._plot()
+        self.plot()
 
     def action_zero( self ) -> None:
         """Move the view to 0, 0."""
@@ -284,7 +284,7 @@ class Mandelbrot( Canvas ):
         self._to_x   = width
         self._from_y = -height
         self._to_y   = height
-        self._plot()
+        self.plot()
 
     @staticmethod
     def _scale( from_pos: Decimal, to_pos: Decimal, zoom: Decimal ) -> tuple[ Decimal, Decimal ]:
@@ -322,7 +322,7 @@ class Mandelbrot( Canvas ):
         """
         self._from_x, self._to_x = self._scale( self._from_x, self._to_x, zoom )
         self._from_y, self._to_y = self._scale( self._from_y, self._to_y, zoom )
-        self._plot()
+        self.plot()
 
     def action_max_iter( self, change: int ) -> None:
         """Change the maximum number of iterations for a calculation.
@@ -333,7 +333,7 @@ class Mandelbrot( Canvas ):
         # Keep a lower bound for the max iteration.
         if ( self._max_iteration + change ) >= 10:
             self._max_iteration += change
-            self._plot()
+            self.plot()
         else:
             self.app.bell()
 
@@ -345,12 +345,12 @@ class Mandelbrot( Canvas ):
         """
         if ( self._multibrot + Decimal( change ) ) > 0:
             self._multibrot += Decimal( change )
-            self._plot()
+            self.plot()
         else:
             self.app.bell()
 
     def action_reset( self ) -> None:
         """Reset the display of the Mandelbrot set back to initial conditions."""
-        self.reset()._plot()
+        self.reset().plot()
 
 ### mandelbrot.py ends here
