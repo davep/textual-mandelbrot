@@ -239,11 +239,8 @@ class Mandelbrot( Canvas ):
         Args:
             zoom: The amount to zoom by.
         """
-
-        # Apply the zoom.
         self._from_x, self._to_x = self._scale( self._from_x, self._to_x, zoom )
         self._from_y, self._to_y = self._scale( self._from_y, self._to_y, zoom )
-
         self._plot()
 
     def action_max_iter( self, change: int ) -> None:
