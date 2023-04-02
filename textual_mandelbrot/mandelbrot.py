@@ -225,7 +225,7 @@ class Mandelbrot( Canvas ):
             size: The size of canvas in the desired direction.
 
         Yields:
-            Decimal: Values between the range to fit the plot.
+            Values between the range to fit the plot.
         """
         steps = 0
         step  = Decimal( r_to - r_from ) / Decimal( size )
