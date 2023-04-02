@@ -204,7 +204,6 @@ class Mandelbrot( Canvas ):
         self._to_y   += y_step
 
         self._plot()
-        self.post_message( self.Changed( self ) )
 
     @staticmethod
     def _scale( from_pos: Decimal, to_pos: Decimal, zoom: Decimal ) -> tuple[ Decimal, Decimal ]:
