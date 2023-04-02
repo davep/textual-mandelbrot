@@ -6,7 +6,7 @@ from __future__        import annotations
 from decimal           import Decimal
 from operator          import mul, truediv
 from functools         import lru_cache
-from typing            import Iterator
+from typing            import Iterator, Callable
 from typing_extensions import Self
 
 ##############################################################################
@@ -173,6 +173,7 @@ class Mandelbrot( Canvas ):
         self,
         width: int,
         height: int,
+        colour_source: Callable[ [ int, int ], Color ] = colour_map,
         name: str | None    = None,
         id: str | None      = None, # pylint:disable=redefined-builtin
         classes: str | None = None,
@@ -183,6 +184,7 @@ class Mandelbrot( Canvas ):
         Args:
             width: The width of the Mandelbrot set canvas.
             height: The height of the Mandelbrot set canvas.
+            colour_source: Optional function for providing colours.
             name: The name of the Mandelbrot widget.
             id: The ID of the Mandelbrot widget in the DOM.
             classes: The CSS classes of the Mandelbrot widget.
@@ -201,6 +203,8 @@ class Mandelbrot( Canvas ):
         """Start Y position for the plot."""
         self._to_y: Decimal = Decimal( 1.5 )
         """End Y position for the plot."""
+        self._colour_source = colour_source
+        """Source of colour for the plot."""
 
     def reset( self ) -> Self:
         """Reset the plot.
@@ -246,7 +250,7 @@ class Mandelbrot( Canvas ):
                 for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
                     self.set_pixel(
                         x_pixel, y_pixel,
-                        colour_map(
+                        self._colour_source(
                             _mandelbrot( x_point, y_point, float( self._multibrot ), self._max_iteration ),
                             self._max_iteration
                         )

@@ -5,6 +5,7 @@
 **Released: WiP**
 
 - Added bindings to change the "multibrot" value by smaller steps.
+- The colour mapping is now configurable at the code level.
 
 ## v0.2.0
 
