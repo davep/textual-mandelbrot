@@ -536,10 +536,10 @@
         },
         "textual-canvas": {
             "hashes": [
-                "sha256:4d55a54d73b9c584d61ec40c0ff44c90670c30d503e19c57fbdb3263cd47f51e"
+                "sha256:61ed9e78ca19725a95a360f28fd6233493769168b63d1614e8cb00915022fda0"
             ],
             "index": "pypi",
-            "version": "==0.0.1"
+            "version": "==0.1.0"
         },
         "typing-extensions": {
             "hashes": [
