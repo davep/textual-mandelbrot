@@ -5,7 +5,7 @@
 
 ## Introduction
 
-This packages provides a simple Mandelbrot set widget that can be used in
+This package provides a simple Mandelbrot set widget that can be used in
 [Textual](https://textual.textualize.io/) applications, and also provides an
 application that can be used to explore the classic Mandelbrot set in the
 terminal.
