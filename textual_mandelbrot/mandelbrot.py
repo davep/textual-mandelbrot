@@ -178,11 +178,11 @@ class Mandelbrot( Canvas ):
                             self._max_iteration
                         )
                     )
+        self.post_message( self.Changed( self ) )
 
     def on_mount( self ) -> None:
         """Get the plotter going once the DOM is ready."""
         self._plot()
-        self.post_message( self.Changed( self ) )
 
     MOVE_STEPS: Final = 5
     "Defines the granularity of movement in the application."
@@ -246,7 +246,6 @@ class Mandelbrot( Canvas ):
         self._from_y, self._to_y = self._scale( self._from_y, self._to_y, zoom )
 
         self._plot()
-        self.post_message( self.Changed( self ) )
 
     def action_max_iter( self, change: int ) -> None:
         """Change the maximum number of iterations for a calculation.
@@ -258,7 +257,6 @@ class Mandelbrot( Canvas ):
         if ( self._max_iteration + change ) >= 10:
             self._max_iteration += change
             self._plot()
-            self.post_message( self.Changed( self ) )
         else:
             self.app.bell()
 
@@ -266,6 +264,5 @@ class Mandelbrot( Canvas ):
         """Reset the display of the Mandelbrot set back to initial conditions."""
         self.reset()
         self._plot()
-        self.post_message( self.Changed( self ) )
 
 ### mandelbrot.py ends here
