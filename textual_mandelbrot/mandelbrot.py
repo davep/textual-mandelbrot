@@ -105,12 +105,8 @@ class Mandelbrot( Canvas ):
             "ctrl+pagedown, left_curly_bracket",
             "zoom( 2.0 )", "Out+", key_display="Ctrl+PgDn"
         ),
-        Binding(
-            "shift+pageup", "multibrot( 1 )", "Mul+", key_display="Sh+PgUp"
-        ),
-        Binding(
-            "shift+pagedown", "multibrot( -1 )", "Mul-", key_display="Sh+PgDn"
-        ),
+        Binding( "*", "multibrot( 1 )", "Mul+" ),
+        Binding( "/", "multibrot( -1 )", "Mul-" ),
         Binding( "home", "zero", "0, 0", key_display="Home" ),
         Binding(
             "comma", "max_iter( -10 )","Res-"
