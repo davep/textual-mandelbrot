@@ -2,7 +2,7 @@
 
 ## v0.3.0
 
-**Released: WiP**
+**Released: 2023-04-03**
 
 - Added bindings to change the "multibrot" value by smaller steps.
 - The colour mapping is now configurable at the code level.
