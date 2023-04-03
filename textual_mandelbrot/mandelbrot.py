@@ -5,7 +5,6 @@
 from __future__        import annotations
 from decimal           import Decimal
 from operator          import mul, truediv
-from functools         import lru_cache
 from time              import monotonic
 from typing            import Iterator, Callable
 from typing_extensions import Self
@@ -25,7 +24,6 @@ from textual_canvas import Canvas
 from .colouring import default_map
 
 ##############################################################################
-@lru_cache()
 def _mandelbrot( x: Decimal, y: Decimal, multibrot: float, max_iteration: int ) -> int:
     """Return the Mandelbrot calculation for the point.
 
