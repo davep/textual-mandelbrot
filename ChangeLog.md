@@ -6,6 +6,7 @@
 
 - Added bindings to change the "multibrot" value by smaller steps.
 - The colour mapping is now configurable at the code level.
+- Added key bindings for swapping between the current colour maps.
 - Added the calculation time to the `Changed` message and the display.
 
 ## v0.2.0
