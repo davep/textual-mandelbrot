@@ -8,6 +8,7 @@ from operator          import mul, truediv
 from functools         import lru_cache
 from typing            import Iterator, Callable
 from typing_extensions import Self
+from time              import monotonic
 
 ##############################################################################
 # Textual imports.
@@ -138,11 +139,12 @@ class Mandelbrot( Canvas ):
         This will be sent if the user (un)zooms or moves the display.
         """
 
-        def __init__( self, mandelbrot: Mandelbrot ) -> None:
+        def __init__( self, mandelbrot: Mandelbrot, elapsed: float ) -> None:
             """Initialise the message.
 
             Args:
                 mandelbrot: The Mandelbrot causing the message.
+                elapsed: The time elapsed while calculating the plot.
             """
             super().__init__()
             self.mandelbrot: Mandelbrot = mandelbrot
@@ -159,6 +161,8 @@ class Mandelbrot( Canvas ):
             """End Y position for the plot."""
             self.max_iteration = mandelbrot._max_iteration
             "Maximum number of iterations to perform."
+            self.elapsed = elapsed
+            """The time that elapsed during the drawing of the current view."""
 
     def __init__(
         self,
@@ -248,6 +252,7 @@ class Mandelbrot( Canvas ):
         Returns:
             Self.
         """
+        start = monotonic()
         with self.app.batch_update():
             for x_pixel, x_point in enumerate( self._frange( self._from_x, self._to_x, self.width ) ):
                 for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
@@ -258,7 +263,7 @@ class Mandelbrot( Canvas ):
                             self._max_iteration
                         )
                     )
-        self.post_message( self.Changed( self ) )
+        self.post_message( self.Changed( self, monotonic() - start ) )
         return self
 
     def on_mount( self ) -> None:

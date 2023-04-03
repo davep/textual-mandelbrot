@@ -102,7 +102,11 @@ class MandelbrotApp( App[ None ] ):
         """
         plot                 = self.query_one( Mandelbrot )
         plot.border_title    = f"{event.from_x:.10f}, {event.from_y:.10f} -> {event.to_x:.10f}, {event.to_y:.10f}"
-        plot.border_subtitle = f"{event.multibrot:0.2f} multibrot | {event.max_iteration:0.2f} iterations"
+        plot.border_subtitle = (
+            f"{event.multibrot:0.2f} multibrot | "
+            f"{event.max_iteration:0.2f} iterations | "
+            f"{event.elapsed:0.4f} seconds"
+        )
 
     def action_colour( self, colour: int ) -> None:
         """Set a colour scheme for the plot.
