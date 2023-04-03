@@ -6,9 +6,9 @@ from __future__        import annotations
 from decimal           import Decimal
 from operator          import mul, truediv
 from functools         import lru_cache
+from time              import monotonic
 from typing            import Iterator, Callable
 from typing_extensions import Self
-from time              import monotonic
 
 ##############################################################################
 # Textual imports.
@@ -139,6 +139,7 @@ class Mandelbrot( Canvas ):
         This will be sent if the user (un)zooms or moves the display.
         """
 
+        # pylint:disable=too-many-instance-attributes
         def __init__( self, mandelbrot: Mandelbrot, elapsed: float ) -> None:
             """Initialise the message.
 
