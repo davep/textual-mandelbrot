@@ -24,4 +24,38 @@ application will run.
 ![mandelexp in action](https://raw.githubusercontent.com/davep/textual-mandelbrot/main/img/mandelexp03.png)
 ![mandelexp in action](https://raw.githubusercontent.com/davep/textual-mandelbrot/main/img/mandelexp04.png)
 
+## Exploring
+
+If you use `mandelexp` to run up the display, the following keys are
+available:
+
+| Keys              | Action                                |
+|-------------------|---------------------------------------|
+| Up, w, k          | Move up                               |
+| Shift+Up, W, K    | Move up slowly                        |
+| Down, s, j        | Move down                             |
+| Shift+Down, S, J  | Move down slowly                      |
+| Left, a, h        | Move left                             |
+| Shift+Left, A, H  | Move left slowly                      |
+| Right, d, l       | Move right                            |
+| Shift+Right, D, L | Move right slowly                     |
+| PageUp, ]         | Zoom in                               |
+| PageDown, [       | Zoom out                              |
+| Ctrl+PageUp, }    | Zoon in deeper                        |
+| Ctrl+PageDown, {  | Zoom out wider                        |
+| *, Ctrl+Up        | Increase "multobrot"                  |
+| /, Ctrl+Down      | Decrease "multibrot"                  |
+| Ctrl+Shift+Up     | Increase "multibrot" in smaller steps |
+| Ctrl+Shift+Down   | Decrease "multibrot" in smaller steps |
+| Home              | Center 0,0 in the display             |
+| ,                 | Decrease iterations by 10             |
+| <                 | Decrease iterations by 100            |
+| .                 | Increase iterations by 10             |
+| >                 | Increase iterations by 100            |
+| Ctrl+r            | Reset to initial state                |
+| Escape            | Quit the application                  |
+| 1                 | Colour set 1                          |
+| 2                 | Colour set 2                          |
+| 3                 | Colour set 3                          |
+
 [//]: # (README.md ends here)
