@@ -67,7 +67,7 @@ class Mandelbrot( Canvas ):
             "up, w, k", "move( 0, -1 )", "Up", show=False
         ),
         Binding(
-            "shift+up, W, W", "move( 0, -1, 50 )", "Up", show=False
+            "shift+up, W, K", "move( 0, -1, 50 )", "Up", show=False
         ),
         Binding(
             "down, s, j", "move( 0, 1 )", "Down", show=False
