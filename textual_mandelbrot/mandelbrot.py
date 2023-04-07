@@ -11,9 +11,9 @@ from typing_extensions import Self
 
 ##############################################################################
 # Textual imports.
-from textual.binding  import Binding
-from textual.color    import Color
-from textual.message  import Message
+from textual.binding import Binding
+from textual.color   import Color
+from textual.message import Message
 
 ##############################################################################
 # Textual-canvas imports.
