@@ -148,18 +148,6 @@ class Mandelbrot( Canvas ):
             super().__init__()
             self.mandelbrot: Mandelbrot = mandelbrot
             """The Mandelbrot widget that caused the event."""
-            self.multibrot: Decimal = mandelbrot._multibrot
-            """The 'multibrot' value."""
-            self.from_x: Decimal = mandelbrot._from_x
-            """Start X position for the plot."""
-            self.to_x: Decimal = mandelbrot._to_x
-            """End X position for the plot."""
-            self.from_y: Decimal = mandelbrot._from_y
-            """Start Y position for the plot."""
-            self.to_y: Decimal = mandelbrot._to_y
-            """End Y position for the plot."""
-            self.max_iteration = mandelbrot._max_iteration
-            "Maximum number of iterations to perform."
             self.elapsed = elapsed
             """The time that elapsed during the drawing of the current view."""
 
@@ -186,7 +174,7 @@ class Mandelbrot( Canvas ):
         """
         super().__init__( width, height, name=name, id=id, classes=classes, disabled=disabled )
         self._max_iteration: int = 80
-        "Maximum number of iterations to perform."
+        """Maximum number of iterations to perform."""
         self._multibrot: Decimal = Decimal( 2.0 )
         """The 'multibrot' value."""
         self._from_x: Decimal = Decimal( -2.5 )
@@ -199,6 +187,36 @@ class Mandelbrot( Canvas ):
         """End Y position for the plot."""
         self._colour_source = colour_source
         """Source of colour for the plot."""
+
+    @property
+    def max_iteration( self ) -> int:
+        """Maximum number of iterations to perform."""
+        return self._max_iteration
+
+    @property
+    def multibrot( self ) -> Decimal:
+        """The 'multibrot' value."""
+        return self._multibrot
+
+    @property
+    def from_x( self ) -> Decimal:
+        """Start X position for the plot."""
+        return self._from_x
+
+    @property
+    def to_x( self ) -> Decimal:
+        """End X position for the plot."""
+        return self._to_x
+
+    @property
+    def from_y( self ) -> Decimal:
+        """Start Y position for the plot."""
+        return self._from_y
+
+    @property
+    def to_y( self ) -> Decimal:
+        """End Y position for the plot."""
+        return self._to_y
 
     def reset( self ) -> Self:
         """Reset the plot.
