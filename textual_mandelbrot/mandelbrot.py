@@ -150,6 +150,11 @@ class Mandelbrot( Canvas ):
             self.elapsed = elapsed
             """The time that elapsed during the drawing of the current view."""
 
+        @property
+        def control(self) -> Mandelbrot:
+            """Alias for the reference to the Mandelbrot widget."""
+            return self.mandelbrot
+
     def __init__(
         self,
         width: int,
