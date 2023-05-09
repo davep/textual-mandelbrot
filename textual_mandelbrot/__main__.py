@@ -6,6 +6,7 @@ from __future__ import annotations
 
 ##############################################################################
 # Textual imports.
+from textual         import on
 from textual.app     import App, ComposeResult
 from textual.binding import Binding
 from textual.widgets import Header, Footer
@@ -94,7 +95,8 @@ class MandelbrotApp( App[ None ] ):
         """Set things up once the DOM is available."""
         self.query_one( Mandelbrot ).focus()
 
-    def on_mandelbrot_changed( self, event: Mandelbrot.Changed ) -> None:
+    @on(Mandelbrot.Changed)
+    def update_titles( self, event: Mandelbrot.Changed ) -> None:
         """Handle the parameters of the Mandelbrot being changed.
 
         Args:
