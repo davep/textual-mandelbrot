@@ -137,7 +137,6 @@ class Mandelbrot( Canvas ):
         This will be sent if the user (un)zooms or moves the display.
         """
 
-        # pylint:disable=too-many-instance-attributes
         def __init__( self, mandelbrot: Mandelbrot, elapsed: float ) -> None:
             """Initialise the message.
 
