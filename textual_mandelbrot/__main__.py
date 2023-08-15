@@ -57,8 +57,8 @@ class MandelbrotApp( App[ None ] ):
         # of "magic number" work here; 2 is allowing for the border of the
         # Canvas widget; 4 is allowing for the border of the Canvas widget
         # and the Header and Footer widgets.
-        display_width = self.app.console.width - 2
-        display_height = self.app.console.height - 4
+        display_width = self.app.size.width - 2
+        display_height = self.app.size.height - 4
 
         # Go for 4:3 based off the width.
         best_width  = display_width
