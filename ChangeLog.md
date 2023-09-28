@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## v0.5.0
+
+**Released: 2023-08-15**
+
+- Modified the way that the dimensions of the terminal are tested.
+
 ## v0.4.0
 
 **Released: 2023-04-15**
