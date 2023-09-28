@@ -6,11 +6,14 @@ name = "pypi"
 [packages]
 textual = "*"
 textual-canvas = "*"
+black = "*"
 
 [dev-packages]
 pylint = "*"
 mypy = "*"
 twine = "*"
+black = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.7"
