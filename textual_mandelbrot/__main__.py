@@ -6,19 +6,20 @@ from __future__ import annotations
 
 ##############################################################################
 # Textual imports.
-from textual         import on
-from textual.app     import App, ComposeResult
+from textual import on
+from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.widgets import Header, Footer
 
 ##############################################################################
 # Local imports.
-from .           import __version__
+from . import __version__
 from .mandelbrot import Mandelbrot
-from .colouring  import default_map, blue_brown_map, shades_of_green
+from .colouring import default_map, blue_brown_map, shades_of_green
+
 
 ##############################################################################
-class MandelbrotApp( App[ None ] ):
+class MandelbrotApp(App[None]):
     """A Textual-based Mandelbrot set plotting application for the terminal."""
 
     TITLE = "Mandelbrot"
@@ -38,13 +39,13 @@ class MandelbrotApp( App[ None ] ):
     """
 
     BINDINGS = [
-        Binding( "1", "colour( 0 )", "Colours 1", show=False ),
-        Binding( "2", "colour( 1 )", "Colours 2", show=False ),
-        Binding( "3", "colour( 2 )", "Colours 2", show=False )
+        Binding("1", "colour( 0 )", "Colours 1", show=False),
+        Binding("2", "colour( 1 )", "Colours 2", show=False),
+        Binding("3", "colour( 2 )", "Colours 2", show=False),
     ]
     """Keyboard bindings for the application."""
 
-    def _best_size( self ) -> tuple[ tuple[ int, int ], tuple[ int, int ] ]:
+    def _best_size(self) -> tuple[tuple[int, int], tuple[int, int]]:
         """Figure out the best initial size for the plot and the widget.
 
         Returns:
@@ -61,49 +62,49 @@ class MandelbrotApp( App[ None ] ):
         display_height = self.app.size.height - 4
 
         # Go for 4:3 based off the width.
-        best_width  = display_width
-        best_height = ( ( display_width // 4 ) * 3 ) // 2
+        best_width = display_width
+        best_height = ((display_width // 4) * 3) // 2
 
         # If that looks like it isn't going to fit nicely...
         if best_height >= display_height:
             # ...let's try and make it fit from the height first.
             best_height = display_height
-            best_width  = ( ( best_height // 3 ) * 4 ) * 2
+            best_width = ((best_height // 3) * 4) * 2
 
         # Final choice.
-        return ( best_width - 2, ( best_height - 2 ) * 2 ), ( best_width, best_height )
+        return (best_width - 2, (best_height - 2) * 2), (best_width, best_height)
 
-    def _mandelbrot( self ) -> Mandelbrot:
+    def _mandelbrot(self) -> Mandelbrot:
         """Create the Mandelbrot plotting widget.
 
         Returns:
             The widget.
         """
-        ( canvas_width, canvas_height ), ( widget_width, widget_height ) = self._best_size()
-        plot = Mandelbrot( canvas_width, canvas_height )
-        plot.styles.width  = widget_width
+        (canvas_width, canvas_height), (widget_width, widget_height) = self._best_size()
+        plot = Mandelbrot(canvas_width, canvas_height)
+        plot.styles.width = widget_width
         plot.styles.height = widget_height
         return plot
 
-    def compose( self ) -> ComposeResult:
+    def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
         yield self._mandelbrot()
         yield Footer()
 
-    def on_mount( self ) -> None:
+    def on_mount(self) -> None:
         """Set things up once the DOM is available."""
-        self.query_one( Mandelbrot ).focus()
+        self.query_one(Mandelbrot).focus()
 
     @on(Mandelbrot.Changed)
-    def update_titles( self, event: Mandelbrot.Changed ) -> None:
+    def update_titles(self, event: Mandelbrot.Changed) -> None:
         """Handle the parameters of the Mandelbrot being changed.
 
         Args:
             event: The event with the change details.
         """
-        plot                 = self.query_one( Mandelbrot )
-        plot.border_title    = (
+        plot = self.query_one(Mandelbrot)
+        plot.border_title = (
             f"{event.mandelbrot.from_x:.10f}, {event.mandelbrot.from_y:.10f}"
             " -> "
             f"{event.mandelbrot.to_x:.10f}, {event.mandelbrot.to_y:.10f}"
@@ -114,20 +115,22 @@ class MandelbrotApp( App[ None ] ):
             f"{event.elapsed:0.4f} seconds"
         )
 
-    def action_colour( self, colour: int ) -> None:
+    def action_colour(self, colour: int) -> None:
         """Set a colour scheme for the plot.
 
         Args:
             colour: The number of the colour scheme to use.
         """
-        self.query_one( Mandelbrot ).set_colour_source( [
-            default_map, blue_brown_map, shades_of_green
-        ][ colour] )
+        self.query_one(Mandelbrot).set_colour_source(
+            [default_map, blue_brown_map, shades_of_green][colour]
+        )
+
 
 ##############################################################################
 def main() -> None:
     """Main entry point for the console script version."""
     MandelbrotApp().run()
+
 
 ##############################################################################
 # Run the main application if we're being called on as main.

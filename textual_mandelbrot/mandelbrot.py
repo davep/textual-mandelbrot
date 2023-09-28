@@ -2,17 +2,17 @@
 
 ##############################################################################
 # Python imports.
-from __future__        import annotations
-from decimal           import Decimal
-from operator          import mul, truediv
-from time              import monotonic
-from typing            import Iterator, Callable
+from __future__ import annotations
+from decimal import Decimal
+from operator import mul, truediv
+from time import monotonic
+from typing import Iterator, Callable
 from typing_extensions import Self
 
 ##############################################################################
 # Textual imports.
 from textual.binding import Binding
-from textual.color   import Color
+from textual.color import Color
 from textual.message import Message
 
 ##############################################################################
@@ -23,8 +23,9 @@ from textual_canvas import Canvas
 # Local imports.
 from .colouring import default_map
 
+
 ##############################################################################
-def _mandelbrot( x: Decimal, y: Decimal, multibrot: float, max_iteration: int ) -> int:
+def _mandelbrot(x: Decimal, y: Decimal, multibrot: float, max_iteration: int) -> int:
     """Return the Mandelbrot calculation for the point.
 
     Args:
@@ -41,16 +42,17 @@ def _mandelbrot( x: Decimal, y: Decimal, multibrot: float, max_iteration: int ) 
         escaped, if the `max_iteration` has been hit without the calculation
         going above 2.0.
     """
-    c1 = complex( x, y )
+    c1 = complex(x, y)
     c2 = 0j
-    for n in range( max_iteration ):
-        if abs( c2 ) > 2:
+    for n in range(max_iteration):
+        if abs(c2) > 2:
             return n
-        c2 = c1 + ( c2 ** multibrot )
+        c2 = c1 + (c2**multibrot)
     return 0
 
+
 ##############################################################################
-class Mandelbrot( Canvas ):
+class Mandelbrot(Canvas):
     """A Mandelbrot-plotting widget."""
 
     DEFAULT_CSS = """
@@ -61,83 +63,53 @@ class Mandelbrot( Canvas ):
     """
 
     BINDINGS = [
+        Binding("up, w, k", "move( 0, -1 )", "Up", show=False),
+        Binding("shift+up, W, K", "move( 0, -1, 50 )", "Up", show=False),
+        Binding("down, s, j", "move( 0, 1 )", "Down", show=False),
+        Binding("shift+down, S, J", "move( 0, 1, 50 )", "Down", show=False),
+        Binding("left, a, h", "move( -1, 0 )", "Left", show=False),
+        Binding("shift+left, A, H", "move( -1, 0, 50 )", "Left", show=False),
+        Binding("right, d, l", "move( 1, 0 )", "Right", show=False),
+        Binding("shift+right, D, L", "move( 1, 0, 50 )", "Right", show=False),
         Binding(
-            "up, w, k", "move( 0, -1 )", "Up", show=False
+            "pageup, right_square_bracket", "zoom( -1.2 )", "In", key_display="PgUp"
         ),
         Binding(
-            "shift+up, W, K", "move( 0, -1, 50 )", "Up", show=False
-        ),
-        Binding(
-            "down, s, j", "move( 0, 1 )", "Down", show=False
-        ),
-        Binding(
-            "shift+down, S, J", "move( 0, 1, 50 )", "Down", show=False
-        ),
-        Binding(
-            "left, a, h", "move( -1, 0 )", "Left", show=False
-        ),
-        Binding(
-            "shift+left, A, H", "move( -1, 0, 50 )", "Left", show=False
-        ),
-        Binding(
-            "right, d, l", "move( 1, 0 )", "Right", show=False
-        ),
-        Binding(
-            "shift+right, D, L", "move( 1, 0, 50 )", "Right", show=False
-        ),
-        Binding(
-            "pageup, right_square_bracket",
-            "zoom( -1.2 )", "In", key_display="PgUp"
-        ),
-        Binding(
-            "pagedown, left_square_bracket",
-            "zoom( 1.2 )", "Out", key_display="PgDn"
+            "pagedown, left_square_bracket", "zoom( 1.2 )", "Out", key_display="PgDn"
         ),
         Binding(
             "ctrl+pageup, right_curly_bracket",
-            "zoom( -2.0 )", "In+", key_display="Ctrl+PgUp"
+            "zoom( -2.0 )",
+            "In+",
+            key_display="Ctrl+PgUp",
         ),
         Binding(
             "ctrl+pagedown, left_curly_bracket",
-            "zoom( 2.0 )", "Out+", key_display="Ctrl+PgDn"
+            "zoom( 2.0 )",
+            "Out+",
+            key_display="Ctrl+PgDn",
         ),
-        Binding( "*, ctrl+up", "multibrot( 1 )", "Mul+" ),
-        Binding( "/, ctrl+down", "multibrot( -1 )", "Mul-" ),
-        Binding(
-            "ctrl+shift+up", "multibrot( 0.05 )", "Mul+", show=False
-        ),
-        Binding(
-            "ctrl+shift+down", "multibrot( -0.05 )", "Mul-", show=False
-        ),
-        Binding( "home", "zero", "0, 0", key_display="Home" ),
-        Binding(
-            "comma", "max_iter( -10 )","Res-"
-        ),
-        Binding(
-            "less_than_sign", "max_iter( -100 )", "Res--"
-        ),
-        Binding(
-            "full_stop", "max_iter( 10 )", "Res+"
-        ),
-        Binding(
-            "greater_than_sign", "max_iter( 100 )", "Res++"
-        ),
-        Binding(
-            "ctrl+r", "reset", "Reset"
-        ),
-        Binding(
-            "escape", "app.quit", "Exit"
-        )
+        Binding("*, ctrl+up", "multibrot( 1 )", "Mul+"),
+        Binding("/, ctrl+down", "multibrot( -1 )", "Mul-"),
+        Binding("ctrl+shift+up", "multibrot( 0.05 )", "Mul+", show=False),
+        Binding("ctrl+shift+down", "multibrot( -0.05 )", "Mul-", show=False),
+        Binding("home", "zero", "0, 0", key_display="Home"),
+        Binding("comma", "max_iter( -10 )", "Res-"),
+        Binding("less_than_sign", "max_iter( -100 )", "Res--"),
+        Binding("full_stop", "max_iter( 10 )", "Res+"),
+        Binding("greater_than_sign", "max_iter( 100 )", "Res++"),
+        Binding("ctrl+r", "reset", "Reset"),
+        Binding("escape", "app.quit", "Exit"),
     ]
     """Keyboard bindings for the widget."""
 
-    class Changed( Message ):
+    class Changed(Message):
         """Message sent when the range of the display changes.
 
         This will be sent if the user (un)zooms or moves the display.
         """
 
-        def __init__( self, mandelbrot: Mandelbrot, elapsed: float ) -> None:
+        def __init__(self, mandelbrot: Mandelbrot, elapsed: float) -> None:
             """Initialise the message.
 
             Args:
@@ -159,11 +131,11 @@ class Mandelbrot( Canvas ):
         self,
         width: int,
         height: int,
-        colour_source: Callable[ [ int, int ], Color ] = default_map,
-        name: str | None    = None,
-        id: str | None      = None, # pylint:disable=redefined-builtin
+        colour_source: Callable[[int, int], Color] = default_map,
+        name: str | None = None,
+        id: str | None = None,  # pylint:disable=redefined-builtin
         classes: str | None = None,
-        disabled: bool      = False
+        disabled: bool = False,
     ):
         """Initialise the canvas.
 
@@ -176,67 +148,69 @@ class Mandelbrot( Canvas ):
             classes: The CSS classes of the Mandelbrot widget.
             disabled: Whether the Mandelbrot widget is disabled or not.
         """
-        super().__init__( width, height, name=name, id=id, classes=classes, disabled=disabled )
+        super().__init__(
+            width, height, name=name, id=id, classes=classes, disabled=disabled
+        )
         self._max_iteration: int = 80
         """Maximum number of iterations to perform."""
-        self._multibrot: Decimal = Decimal( 2.0 )
+        self._multibrot: Decimal = Decimal(2.0)
         """The 'multibrot' value."""
-        self._from_x: Decimal = Decimal( -2.5 )
+        self._from_x: Decimal = Decimal(-2.5)
         """Start X position for the plot."""
-        self._to_x: Decimal = Decimal( 1.5 )
+        self._to_x: Decimal = Decimal(1.5)
         """End X position for the plot."""
-        self._from_y: Decimal = Decimal( -1.5 )
+        self._from_y: Decimal = Decimal(-1.5)
         """Start Y position for the plot."""
-        self._to_y: Decimal = Decimal( 1.5 )
+        self._to_y: Decimal = Decimal(1.5)
         """End Y position for the plot."""
         self._colour_source = colour_source
         """Source of colour for the plot."""
 
     @property
-    def max_iteration( self ) -> int:
+    def max_iteration(self) -> int:
         """Maximum number of iterations to perform."""
         return self._max_iteration
 
     @property
-    def multibrot( self ) -> Decimal:
+    def multibrot(self) -> Decimal:
         """The 'multibrot' value."""
         return self._multibrot
 
     @property
-    def from_x( self ) -> Decimal:
+    def from_x(self) -> Decimal:
         """Start X position for the plot."""
         return self._from_x
 
     @property
-    def to_x( self ) -> Decimal:
+    def to_x(self) -> Decimal:
         """End X position for the plot."""
         return self._to_x
 
     @property
-    def from_y( self ) -> Decimal:
+    def from_y(self) -> Decimal:
         """Start Y position for the plot."""
         return self._from_y
 
     @property
-    def to_y( self ) -> Decimal:
+    def to_y(self) -> Decimal:
         """End Y position for the plot."""
         return self._to_y
 
-    def reset( self ) -> Self:
+    def reset(self) -> Self:
         """Reset the plot.
 
         Returns:
             Self.
         """
         self._max_iteration = 80
-        self._multibrot     = Decimal( 2 )
-        self._from_x        = Decimal( -2.5 )
-        self._to_x          = Decimal( 1.5 )
-        self._from_y        = Decimal( -1.5 )
-        self._to_y          = Decimal( 1.5 )
+        self._multibrot = Decimal(2)
+        self._from_x = Decimal(-2.5)
+        self._to_x = Decimal(1.5)
+        self._from_y = Decimal(-1.5)
+        self._to_y = Decimal(1.5)
         return self
 
-    def set_colour_source( self, colour_source: Callable[ [ int, int ], Color ] ) -> Self:
+    def set_colour_source(self, colour_source: Callable[[int, int], Color]) -> Self:
         """Set a new colour source.
 
         Args:
@@ -248,7 +222,7 @@ class Mandelbrot( Canvas ):
         self._colour_source = colour_source
         return self.plot()
 
-    def _frange( self, r_from: Decimal, r_to: Decimal, size: int ) -> Iterator[ Decimal ]:
+    def _frange(self, r_from: Decimal, r_to: Decimal, size: int) -> Iterator[Decimal]:
         """Generate a float range for the plot.
 
         Args:
@@ -260,14 +234,14 @@ class Mandelbrot( Canvas ):
             Values between the range to fit the plot.
         """
         steps = 0
-        step  = Decimal( r_to - r_from ) / Decimal( size )
-        n     = Decimal( r_from )
+        step = Decimal(r_to - r_from) / Decimal(size)
+        n = Decimal(r_from)
         while n < r_to and steps < size:
             yield n
-            n     += step
+            n += step
             steps += 1
 
-    def plot( self ) -> Self:
+    def plot(self) -> Self:
         """Plot the Mandelbrot set using the current conditions.
 
         Returns:
@@ -275,23 +249,33 @@ class Mandelbrot( Canvas ):
         """
         start = monotonic()
         with self.app.batch_update():
-            for x_pixel, x_point in enumerate( self._frange( self._from_x, self._to_x, self.width ) ):
-                for y_pixel, y_point in enumerate( self._frange( self._from_y, self._to_y, self.height ) ):
+            for x_pixel, x_point in enumerate(
+                self._frange(self._from_x, self._to_x, self.width)
+            ):
+                for y_pixel, y_point in enumerate(
+                    self._frange(self._from_y, self._to_y, self.height)
+                ):
                     self.set_pixel(
-                        x_pixel, y_pixel,
+                        x_pixel,
+                        y_pixel,
                         self._colour_source(
-                            _mandelbrot( x_point, y_point, float( self._multibrot ), self._max_iteration ),
-                            self._max_iteration
-                        )
+                            _mandelbrot(
+                                x_point,
+                                y_point,
+                                float(self._multibrot),
+                                self._max_iteration,
+                            ),
+                            self._max_iteration,
+                        ),
                     )
-        self.post_message( self.Changed( self, monotonic() - start ) )
+        self.post_message(self.Changed(self, monotonic() - start))
         return self
 
-    def on_mount( self ) -> None:
+    def on_mount(self) -> None:
         """Get the plotter going once the DOM is ready."""
         self.plot()
 
-    def action_move( self, x: int, y: int, steps: int=5 ) -> None:
+    def action_move(self, x: int, y: int, steps: int = 5) -> None:
         """Move the Mandelbrot Set within the view.
 
         Args:
@@ -299,28 +283,30 @@ class Mandelbrot( Canvas ):
             y: The amount and direction to move in Y.
         """
 
-        x_step = Decimal( x * ( ( self._to_x - self._from_x ) / steps ) )
-        y_step = Decimal( y * ( ( self._to_y - self._from_y ) / steps ) )
+        x_step = Decimal(x * ((self._to_x - self._from_x) / steps))
+        y_step = Decimal(y * ((self._to_y - self._from_y) / steps))
 
         self._from_x += x_step
-        self._to_x   += x_step
+        self._to_x += x_step
         self._from_y += y_step
-        self._to_y   += y_step
+        self._to_y += y_step
 
         self.plot()
 
-    def action_zero( self ) -> None:
+    def action_zero(self) -> None:
         """Move the view to 0, 0."""
-        width        = ( self._to_x - self._from_x ) / Decimal( 2 )
-        height       = ( self._to_y - self._from_y ) / Decimal( 2 )
+        width = (self._to_x - self._from_x) / Decimal(2)
+        height = (self._to_y - self._from_y) / Decimal(2)
         self._from_x = -width
-        self._to_x   = width
+        self._to_x = width
         self._from_y = -height
-        self._to_y   = height
+        self._to_y = height
         self.plot()
 
     @staticmethod
-    def _scale( from_pos: Decimal, to_pos: Decimal, zoom: Decimal ) -> tuple[ Decimal, Decimal ]:
+    def _scale(
+        from_pos: Decimal, to_pos: Decimal, zoom: Decimal
+    ) -> tuple[Decimal, Decimal]:
         """Scale a dimension.
 
         Args:
@@ -335,55 +321,56 @@ class Mandelbrot( Canvas ):
         by = truediv if zoom < 0 else mul
 
         # We don't need the sign anymore.
-        zoom = Decimal( abs( zoom ) )
+        zoom = Decimal(abs(zoom))
 
         # Calculate the old and new dimensions.
         old_dim = to_pos - from_pos
-        new_dim = Decimal( by( old_dim, zoom ) )
+        new_dim = Decimal(by(old_dim, zoom))
 
         # Return the adjusted points.
         return (
-            from_pos + Decimal( ( old_dim - new_dim ) / 2 ),
-            to_pos - Decimal( ( old_dim - new_dim ) / 2 )
+            from_pos + Decimal((old_dim - new_dim) / 2),
+            to_pos - Decimal((old_dim - new_dim) / 2),
         )
 
-    def action_zoom( self, zoom: Decimal ) -> None:
+    def action_zoom(self, zoom: Decimal) -> None:
         """Zoom in our out.
 
         Args:
             zoom: The amount to zoom by.
         """
-        self._from_x, self._to_x = self._scale( self._from_x, self._to_x, zoom )
-        self._from_y, self._to_y = self._scale( self._from_y, self._to_y, zoom )
+        self._from_x, self._to_x = self._scale(self._from_x, self._to_x, zoom)
+        self._from_y, self._to_y = self._scale(self._from_y, self._to_y, zoom)
         self.plot()
 
-    def action_max_iter( self, change: int ) -> None:
+    def action_max_iter(self, change: int) -> None:
         """Change the maximum number of iterations for a calculation.
 
         Args:
             change: The amount to change by.
         """
         # Keep a lower bound for the max iteration.
-        if ( self._max_iteration + change ) >= 10:
+        if (self._max_iteration + change) >= 10:
             self._max_iteration += change
             self.plot()
         else:
             self.app.bell()
 
-    def action_multibrot( self, change: Decimal ) -> None:
+    def action_multibrot(self, change: Decimal) -> None:
         """Change the 'multibrot' modifier.
 
         Args:
             change: The amount to change by.
         """
-        if ( self._multibrot + Decimal( change ) ) > 0:
-            self._multibrot += Decimal( change )
+        if (self._multibrot + Decimal(change)) > 0:
+            self._multibrot += Decimal(change)
             self.plot()
         else:
             self.app.bell()
 
-    def action_reset( self ) -> None:
+    def action_reset(self) -> None:
         """Reset the display of the Mandelbrot set back to initial conditions."""
         self.reset().plot()
+
 
 ### mandelbrot.py ends here
