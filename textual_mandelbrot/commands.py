@@ -36,13 +36,16 @@ class MandelbrotCommands(Provider):
         # Get a fuzzy matcher for looking for hits.
         matcher = self.matcher(query)
 
+        # Give all commands a common prefix.
+        prefix = "Mandelbrot: "
+
         # Spin out some commands for setting the colours.
         for colour, source in (
             ("default", default_map),
             ("blue/brown", blue_brown_map),
             ("green", shades_of_green),
         ):
-            colour = f"Mandelbrot: Set the colour map to {colour} "
+            colour = f"{prefix}Set the colour map to {colour} "
             match = matcher.match(colour)
             if match:
                 yield Hit(
@@ -57,7 +60,7 @@ class MandelbrotCommands(Provider):
             ("Go home", "zero", "Go to 0, 0 in the Mandelbrot set"),
             ("Reset", "reset", "Reset the Mandelbrot set"),
         ):
-            command = f"Mandelbrot: {command}"
+            command = f"{prefix}{command}"
             match = matcher.match(command)
             if match:
                 yield Hit(
