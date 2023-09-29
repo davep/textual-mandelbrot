@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## v0.5.1
+
+**Released: 2023-09-28**
+
+- Various internal tweaks and updated Textual.
+
 ## v0.5.0
 
 **Released: 2023-08-15**
