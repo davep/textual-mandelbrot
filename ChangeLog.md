@@ -2,7 +2,7 @@
 
 ## v0.6.0
 
-**Released: WIP**
+**Released: 2023-09-29**
 
 - Added some application-specific commands to the Textual Command Palette.
 
