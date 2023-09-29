@@ -57,8 +57,20 @@ class MandelbrotCommands(Provider):
 
         # Spin out some commands based around available actions.
         for command, action, help in (
+            (
+                "Fast zoom in",
+                "zoom(-2.0)",
+                "Faster zoom further into the Mandelbrot set",
+            ),
+            (
+                "Fast zoom out",
+                "zoom(2.0)",
+                "Faster zoom further out of the Mandelbrot set",
+            ),
             ("Go home", "zero", "Go to 0, 0 in the Mandelbrot set"),
             ("Reset", "reset", "Reset the Mandelbrot set"),
+            ("Zoom in", "zoom(-1.2)", "Zoom further into the Mandelbrot set"),
+            ("Zoom out", "zoom(1.2)", "Zoom further out of the Mandelbrot set"),
         ):
             command = f"{prefix}{command}"
             match = matcher.match(command)
