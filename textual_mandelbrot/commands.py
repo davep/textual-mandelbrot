@@ -27,8 +27,13 @@ class MandelbrotCommands(Provider):
         Yields:
             Command hits for use in the command palette.
         """
+
+        # Nothing in here makes sense if the user isn't current on a
+        # Mandelbrot set.
         if not isinstance(self.focused, Mandelbrot):
             return
+
+        # Get a fuzzy matcher for looking for hits.
         matcher = self.matcher(query)
 
         # Spin out some commands for setting the colours.
