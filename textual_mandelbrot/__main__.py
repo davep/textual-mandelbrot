@@ -16,6 +16,7 @@ from textual.widgets import Header, Footer
 from . import __version__
 from .mandelbrot import Mandelbrot
 from .colouring import default_map, blue_brown_map, shades_of_green
+from .commands import MandelbrotCommands
 
 
 ##############################################################################
@@ -44,6 +45,8 @@ class MandelbrotApp(App[None]):
         Binding("3", "colour( 2 )", "Colours 2", show=False),
     ]
     """Keyboard bindings for the application."""
+
+    COMMANDS = App.COMMANDS | {MandelbrotCommands}
 
     def _best_size(self) -> tuple[tuple[int, int], tuple[int, int]]:
         """Figure out the best initial size for the plot and the widget.

@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## v0.6.0
+
+**Released: WIP**
+
+- Added some application-specific commands to the Textual Command Palette.
+
 ## v0.5.1
 
 **Released: 2023-09-28**
