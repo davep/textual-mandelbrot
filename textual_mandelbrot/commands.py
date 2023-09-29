@@ -37,7 +37,7 @@ class MandelbrotCommands(Provider):
             ("blue/brown", blue_brown_map),
             ("green", shades_of_green),
         ):
-            colour = f"Set the Mandelbrot colour map to {colour} "
+            colour = f"Mandelbrot: Set the colour map to {colour} "
             match = matcher.match(colour)
             if match:
                 yield Hit(
@@ -52,6 +52,7 @@ class MandelbrotCommands(Provider):
             ("Go home", "zero", "Go to 0, 0 in the Mandelbrot set"),
             ("Reset", "reset", "Reset the Mandelbrot set"),
         ):
+            command = f"Mandelbrot: {command}"
             match = matcher.match(command)
             if match:
                 yield Hit(
