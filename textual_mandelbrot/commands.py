@@ -56,7 +56,7 @@ class MandelbrotCommands(Provider):
                 )
 
         # Spin out some commands based around available actions.
-        for command, action, help in (
+        for command, action, help_text in (
             (
                 "Fast zoom in",
                 "zoom(-2.0)",
@@ -79,7 +79,7 @@ class MandelbrotCommands(Provider):
                     match,
                     matcher.highlight(command),
                     partial(self.focused.run_action, action),
-                    help=help,
+                    help=help_text,
                 )
 
 
