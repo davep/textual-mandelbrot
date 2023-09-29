@@ -71,6 +71,26 @@ class MandelbrotCommands(Provider):
             ("Reset", "reset", "Reset the Mandelbrot set"),
             ("Zoom in", "zoom(-1.2)", "Zoom further into the Mandelbrot set"),
             ("Zoom out", "zoom(1.2)", "Zoom further out of the Mandelbrot set"),
+            (
+                "More detail",
+                "max_iter(10)",
+                "Add more detail to the Mandelbrot set (will run slower)",
+            ),
+            (
+                "Less detail",
+                "max_iter(-10)",
+                "Remove detail from the Mandelbrot set (will run faster)",
+            ),
+            (
+                "Lots more detail",
+                "max_iter(100)",
+                "Add more detail to the Mandelbrot set (will run slower)",
+            ),
+            (
+                "Lots less detail",
+                "max_iter(-100)",
+                "Remove detail from the Mandelbrot set (will run faster)",
+            ),
         ):
             command = f"{prefix}{command}"
             match = matcher.match(command)
