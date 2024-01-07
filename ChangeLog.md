@@ -2,7 +2,7 @@
 
 ## v0.7.0
 
-**Released: WiP**
+**Released: 2024-01-07**
 
 - Dropped Python 3.7 support.
 - Bumped minimum Textual version to v0.47.1.
