@@ -1,5 +1,12 @@
 # textual-mandelbrot ChangeLog
 
+## v0.7.0
+
+**Released: WiP**
+
+- Dropped Python 3.7 support.
+- Bumped minimum Textual version to v0.47.1.
+
 ## v0.6.0
 
 **Released: 2023-09-29**
