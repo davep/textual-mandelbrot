@@ -3,10 +3,12 @@
 ##############################################################################
 # Python imports.
 from functools import partial
+from typing import Callable, Iterator
 
 ##############################################################################
 # Textual imports.
-from textual.command import Hit, Hits, Provider
+from textual.color import Color
+from textual.command import DiscoveryHit, Hit, Hits, Provider
 
 ##############################################################################
 # Local imports.
@@ -18,43 +20,25 @@ from .mandelbrot import Mandelbrot
 class MandelbrotCommands(Provider):
     """A source of command palette commands for the Mandelbrot widget."""
 
-    async def search(self, query: str) -> Hits:
-        """Handle a request to search for system commands that match the query.
+    PREFIX = "Mandelbrot: "
+    """Prefix that is common to all the commands."""
 
-        Args:
-            user_input: The user input to be matched.
-
-        Yields:
-            Command hits for use in the command palette.
-        """
-
-        # Nothing in here makes sense if the user isn't current on a
-        # Mandelbrot set.
-        if not isinstance(self.focused, Mandelbrot):
-            return
-
-        # Get a fuzzy matcher for looking for hits.
-        matcher = self.matcher(query)
-
-        # Give all commands a common prefix.
-        prefix = "Mandelbrot: "
-
-        # Spin out some commands for setting the colours.
+    @classmethod
+    def _colour_commands(cls) -> Iterator[tuple[str, Callable[[int, int], Color], str]]:
+        """The colour commands."""
         for colour, source in (
             ("default", default_map),
             ("blue/brown", blue_brown_map),
             ("green", shades_of_green),
         ):
-            colour = f"{prefix}Set the colour map to {colour} "
-            match = matcher.match(colour)
-            if match:
-                yield Hit(
-                    match,
-                    matcher.highlight(colour),
-                    partial(self.focused.set_colour_source, source),
-                    help=f"Set the Mandelbrot colour palette to {colour}",
-                )
+            yield (
+                f"{cls.PREFIX}Set the colour map to {colour} ",
+                source,
+                f"Set the Mandelbrot colour palette to {colour}",
+            )
 
+    @classmethod
+    def _action_commands(cls) -> Iterator[tuple[str, str, str]]:
         # Spin out some commands based around available actions.
         for command, action, help_text in (
             (
@@ -92,7 +76,69 @@ class MandelbrotCommands(Provider):
                 "Remove detail from the Mandelbrot set (will run faster)",
             ),
         ):
-            command = f"{prefix}{command}"
+            yield (f"{cls.PREFIX}{command}", action, help_text)
+
+    async def discover(self) -> Hits:
+        """Handle a request to discover commands.
+
+        Yields:
+            Command discovery hits for the command palette.
+        """
+
+        # Nothing in here makes sense if the user isn't current on a
+        # Mandelbrot set.
+        if not isinstance(self.focused, Mandelbrot):
+            return
+
+        # Spin out some commands for setting the colours.
+        for command, source, help_text in self._colour_commands():
+            yield DiscoveryHit(
+                command,
+                partial(self.focused.set_colour_source, source),
+                command,
+                help_text,
+            )
+
+        # Spin out the action commands.
+        for command, action, help_text in self._action_commands():
+            yield DiscoveryHit(
+                command,
+                partial(self.focused.run_action, action),
+                command,
+                help_text,
+            )
+
+    async def search(self, query: str) -> Hits:
+        """Handle a request to search for system commands that match the query.
+
+        Args:
+            user_input: The user input to be matched.
+
+        Yields:
+            Command hits for use in the command palette.
+        """
+
+        # Nothing in here makes sense if the user isn't current on a
+        # Mandelbrot set.
+        if not isinstance(self.focused, Mandelbrot):
+            return
+
+        # Get a fuzzy matcher for looking for hits.
+        matcher = self.matcher(query)
+
+        # Spin out some commands for setting the colours.
+        for command, source, help_text in self._colour_commands():
+            match = matcher.match(command)
+            if match:
+                yield Hit(
+                    match,
+                    matcher.highlight(command),
+                    partial(self.focused.set_colour_source, source),
+                    help=help_text,
+                )
+
+        # Spin out the action commands.
+        for command, action, help_text in self._action_commands():
             match = matcher.match(command)
             if match:
                 yield Hit(

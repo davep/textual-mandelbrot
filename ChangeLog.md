@@ -1,5 +1,12 @@
 # textual-mandelbrot ChangeLog
 
+## v0.8.0
+
+**Released: 2024-03-10**
+
+- Bumped minimum Textual version to v0.52.1.
+- Made the command palette commands appear when opening the command palette.
+
 ## v0.7.0
 
 **Released: 2024-01-07**

@@ -12,11 +12,24 @@ terminal.
 
 ## Installing
 
+### pipx
+
 The package can be installed using [`pipx`](https://pypa.github.io/pipx/):
 
 ```sh
 $ pipx install textual-mandelbrot
 ```
+
+### Homebrew
+
+The package is available via Homebrew. Use the following commands to install:
+
+```sh
+$ brew tap davep/homebrew
+$ brew install textual-mandelbrot
+```
+
+## Running
 
 Once installed you should be able to run the command `mandelexp` and the
 application will run.
