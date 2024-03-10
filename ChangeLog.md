@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## WiP
+
+**Released: WiP**
+
+- Made the command palette commands appear when opening the command palette.
+
 ## v0.7.0
 
 **Released: 2024-01-07**
