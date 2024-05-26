@@ -1,5 +1,12 @@
 # textual-mandelbrot ChangeLog
 
+## v0.8.1
+
+**Released: 2024-05-26**
+
+- Pinned the upper version of Textual due to its current period of
+  instability.
+
 ## v0.8.0
 
 **Released: 2024-03-10**
