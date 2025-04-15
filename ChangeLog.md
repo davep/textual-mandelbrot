@@ -1,5 +1,11 @@
 # textual-mandelbrot ChangeLog
 
+## v0.8.2
+
+**Released: 2025-04-15**
+
+- Unpinned Textual now that it's mostly started to stabilise again.
+
 ## v0.8.1
 
 **Released: 2024-05-26**

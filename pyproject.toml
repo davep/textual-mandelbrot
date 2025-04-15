@@ -1,6 +1,6 @@
 [project]
 name = "textual-mandelbrot"
-version = "0.1.0"
+version = "0.8.2"
 description = "A simple Mandelbrot explorer for the terminal"
 authors = [
     { name = "Dave Pearson", email = "davep@davep.org" }
