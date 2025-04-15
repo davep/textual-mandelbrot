@@ -1,5 +1,71 @@
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
+[project]
+name = "textual-mandelbrot"
+version = "0.1.0"
+description = "A simple Mandelbrot explorer for the terminal"
+authors = [
+    { name = "Dave Pearson", email = "davep@davep.org" }
+]
+dependencies = [
+    "textual>=3.1.0",
+    "textual-canvas>=0.2.1",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+license = { text = "MIT License" }
+keywords = [
+    "terminal",
+    "library",
+    "mandelbrot", "maths"
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Terminals",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
 
-### pyproject.toml ends here
+[project.urls]
+Homepage = "https://github.com/davep/textual-mandelbrot"
+Repository = "https://github.com/davep/textual-mandelbrot"
+Documentation = "https://github.com/davep/textual-mandelbrot"
+Source = "https://github.com/davep/textual-mandelbrot"
+Issues = "https://github.com/davep/textual-mandelbrot/issues"
+Discussions = "https://github.com/davep/textual-mandelbrot/discussions"
+
+[project.scripts]
+mandelexp = "textual_mandelbrot.__main__:main"
+
+[build-system]
+# https://github.com/astral-sh/rye/issues/1446
+requires = ["hatchling==1.26.3", "hatch-vcs"]
+# requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "codespell>=2.4.1",
+    "textual-dev>=1.7.0",
+    "mypy>=1.15.0",
+    "pre-commit>=4.2.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/textual_mandelbrot"]
+
+[tool.pyright]
+venvPath="."
+venv=".venv"
+exclude=[".venv"]
