@@ -54,7 +54,7 @@ available:
 | Shift+Right, D, L | Move right slowly                     |
 | PageUp, ]         | Zoom in                               |
 | PageDown, [       | Zoom out                              |
-| Ctrl+PageUp, }    | Zoon in deeper                        |
+| Ctrl+PageUp, }    | Zoom in deeper                        |
 | Ctrl+PageDown, {  | Zoom out wider                        |
 | *, Ctrl+Up        | Increase "multobrot"                  |
 | /, Ctrl+Down      | Decrease "multibrot"                  |

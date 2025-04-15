@@ -12,7 +12,7 @@ from textual.command import DiscoveryHit, Hit, Hits, Provider
 
 ##############################################################################
 # Local imports.
-from .colouring import default_map, blue_brown_map, shades_of_green
+from .colouring import blue_brown_map, default_map, shades_of_green
 from .mandelbrot import Mandelbrot
 
 

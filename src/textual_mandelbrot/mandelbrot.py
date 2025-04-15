@@ -1,13 +1,15 @@
 """Provides a Textual widget for plotting a Mandelbrot set."""
 
 ##############################################################################
-# Python imports.
+# Backward compatibility.
 from __future__ import annotations
+
+##############################################################################
+# Python imports.
 from decimal import Decimal
 from operator import mul, truediv
 from time import monotonic
-from typing import Iterator, Callable
-from typing_extensions import Self
+from typing import Callable, Iterator
 
 ##############################################################################
 # Textual imports.
@@ -18,6 +20,10 @@ from textual.message import Message
 ##############################################################################
 # Textual-canvas imports.
 from textual_canvas import Canvas
+
+##############################################################################
+# Typing extension imports.
+from typing_extensions import Self
 
 ##############################################################################
 # Local imports.
@@ -71,29 +77,23 @@ class Mandelbrot(Canvas):
         Binding("shift+left, A, H", "move( -1, 0, 50 )", "Left", show=False),
         Binding("right, d, l", "move( 1, 0 )", "Right", show=False),
         Binding("shift+right, D, L", "move( 1, 0, 50 )", "Right", show=False),
-        Binding(
-            "pageup, right_square_bracket", "zoom( -1.2 )", "In", key_display="PgUp"
-        ),
-        Binding(
-            "pagedown, left_square_bracket", "zoom( 1.2 )", "Out", key_display="PgDn"
-        ),
+        Binding("pageup, right_square_bracket", "zoom( -1.2 )", "In"),
+        Binding("pagedown, left_square_bracket", "zoom( 1.2 )", "Out"),
         Binding(
             "ctrl+pageup, right_curly_bracket",
             "zoom( -2.0 )",
             "In+",
-            key_display="Ctrl+PgUp",
         ),
         Binding(
             "ctrl+pagedown, left_curly_bracket",
             "zoom( 2.0 )",
             "Out+",
-            key_display="Ctrl+PgDn",
         ),
         Binding("*, ctrl+up", "multibrot( 1 )", "Mul+"),
         Binding("/, ctrl+down", "multibrot( -1 )", "Mul-"),
         Binding("ctrl+shift+up", "multibrot( 0.05 )", "Mul+", show=False),
         Binding("ctrl+shift+down", "multibrot( -0.05 )", "Mul-", show=False),
-        Binding("home", "zero", "0, 0", key_display="Home"),
+        Binding("home", "zero", "0, 0"),
         Binding("comma", "max_iter( -10 )", "Res-"),
         Binding("less_than_sign", "max_iter( -100 )", "Res--"),
         Binding("full_stop", "max_iter( 10 )", "Res+"),

@@ -1,7 +1,7 @@
 """Mandelbrot plotting application for the terminal."""
 
 ##############################################################################
-# Python imports.
+# Backward compatibility.
 from __future__ import annotations
 
 ##############################################################################
@@ -9,14 +9,14 @@ from __future__ import annotations
 from textual import on
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.widgets import Header, Footer
+from textual.widgets import Footer, Header
 
 ##############################################################################
 # Local imports.
 from . import __version__
-from .mandelbrot import Mandelbrot
-from .colouring import default_map, blue_brown_map, shades_of_green
+from .colouring import blue_brown_map, default_map, shades_of_green
 from .commands import MandelbrotCommands
+from .mandelbrot import Mandelbrot
 
 
 ##############################################################################

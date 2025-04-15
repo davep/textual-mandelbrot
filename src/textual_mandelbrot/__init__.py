@@ -3,7 +3,7 @@
 ######################################################################
 # Main app information.
 __author__ = "Dave Pearson"
-__copyright__ = "Copyright 2023-2024, Dave Pearson"
+__copyright__ = "Copyright 2023-2025, Dave Pearson"
 __credits__ = ["Dave Pearson"]
 __maintainer__ = "Dave Pearson"
 __email__ = "davep@davep.org"
@@ -12,8 +12,8 @@ __licence__ = "MIT"
 
 ##############################################################################
 # Local imports.
+from .colouring import blue_brown_map, default_map, shades_of_green
 from .mandelbrot import Mandelbrot
-from .colouring import default_map, blue_brown_map, shades_of_green
 
 ##############################################################################
 # Export the imports.
