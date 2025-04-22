@@ -5,6 +5,13 @@
 
 ## Introduction
 
+> [!NOTE]
+>
+> This repository is unlikely to get future updates; I've created a
+> from-scratch reimplementation of the application called
+> [Complexitty](https://github.com/davep/complexitty). I suggest installing
+> and playing with that instead.
+
 This package provides a simple Mandelbrot set widget that can be used in
 [Textual](https://textual.textualize.io/) applications, and also provides an
 application that can be used to explore the classic Mandelbrot set in the
